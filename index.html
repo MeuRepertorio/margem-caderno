@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f4f1e9">
+  <meta name="description" content="MARGEM — crie páginas de caderno para copiar à mão. Rotinas de cuidado, desenhos e PDF, sem conta e sem cobranças.">
+  <title>MARGEM — Seu caderno, do seu jeito</title>
+  <style>
+  :root { --ink:#243a4a; --muted:#697a84; --ocean:#365d75; --rule:#bcd2e3; --red:#dfaaa6; --line:#dfded6; --surface:#fffefa; --canvas:#f3f0e8; --soft:#eaece8; --shadow:0 19px 45px rgba(43,58,63,.10); --radius:15px; font-family:Inter,"Segoe UI",Arial,sans-serif; }
+  * { box-sizing:border-box; }
+  html { min-height:100%; background:var(--canvas); }
+  body { margin:0; color:var(--ink); background:var(--canvas); min-height:100vh; }
+  button,input,textarea,select { font:inherit; }
+  button { cursor:pointer; }
+  button:focus-visible, input:focus-visible,textarea:focus-visible,select:focus-visible { outline:3px solid #9ebcd0; outline-offset:2px; }
+  button:disabled { opacity:.4; cursor:not-allowed; }
+  .topbar { min-height:76px; border-bottom:1px solid #dfded6; background:rgba(255,254,249,.96); display:flex; align-items:center; justify-content:space-between; gap:16px; padding:12px clamp(16px,2.7vw,44px); position:relative; z-index:4; }
+  .brand { display:flex; align-items:center; gap:13px; min-width:0; }
+  .brandmark { width:42px;height:44px;border-radius:5px 11px 11px 5px;background:#e4eceb;position:relative;display:grid;place-items:center;font-size:24px;font-weight:800;letter-spacing:-.06em;color:var(--ocean);box-shadow:inset 4px 0 #abc0ca;flex:none;transform:rotate(-3deg); }
+  .brandmark:before { content:"";position:absolute;width:2px;height:29px;background:#c57e7c;left:10px;top:8px; }
+  .brand h1 { font-size:20px;letter-spacing:.17em;line-height:1.1;margin:0;font-weight:900; }
+  .brand p { font-size:11px;color:var(--muted);margin:5px 0 0;white-space:nowrap; }
+  .top-actions { display:flex;align-items:center;gap:9px;flex-wrap:wrap;justify-content:flex-end; }
+  .save-state { font-size:11px;color:#65806f;display:flex;align-items:center;gap:6px;margin-right:4px;white-space:nowrap; }
+  .save-state:before { content:"";width:7px;height:7px;background:#7daa94;border-radius:50%; }
+  .btn { border:1px solid #cbd6d5;background:#fffdfa;color:var(--ocean);border-radius:9px;padding:10px 14px;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:40px;font-weight:700;font-size:12px;transition:background .15s,border-color .15s; }
+  .btn:hover { background:#eaf2f3;border-color:#a8bec7; }
+  .btn.primary { color:white;background:#315a70;border-color:#315a70; }
+  .btn.primary:hover { background:#23475c; }
+  .btn.subtle { border-color:transparent;background:transparent;color:var(--muted); }
+  .btn.subtle:hover { background:#e9efed;color:var(--ink); }
+  .btn.danger { color:#9e4645;border-color:#e7baba; }
+  .btn.small { min-height:32px;padding:6px 9px;font-size:11px; }
+  .app { display:grid;grid-template-columns:minmax(280px,340px) minmax(0,1fr);min-height:calc(100vh - 76px); }
+  .control-side { background:#faf9f5;border-right:1px solid #dddcd5;min-width:0;box-shadow:8px 0 19px rgba(50,70,75,.025); }
+  .control-side-inner { position:sticky;top:0;height:calc(100vh - 76px);min-height:480px;display:flex;flex-direction:column; }
+  .control-intro { padding:21px 22px 16px; }
+  .eyebrow {font-weight:800;letter-spacing:.13em;color:#768b95;font-size:10px;text-transform:uppercase;}
+  .control-intro h2 { margin:8px 0 7px;font-family:Georgia,serif;letter-spacing:-.045em;font-size:27px;font-weight:700; }
+  .control-intro p { color:var(--muted);font-size:12px;line-height:1.6;margin:0; }
+  .tabbar { padding:0 14px 12px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;border-bottom:1px solid #e5e2da; }
+  .tab { min-width:0;background:transparent;border:1px solid transparent;border-radius:9px;color:#677c88;padding:9px 5px;font-size:10px;line-height:1.2;font-weight:750;display:grid;place-items:center;gap:5px; }
+  .tab svg { width:20px;height:20px;stroke:currentColor;stroke-width:1.6;fill:none; }
+  .tab[aria-selected="true"] { background:#e4edf0;color:#27536a;border-color:#cadfe7; }
+  .panel-scroll { overflow-y:auto;flex:1;padding:17px 21px 45px;scrollbar-color:#bbcacb transparent; }
+  .panel { display:none; }
+  .panel.active {display:block;}
+  .panel h3 {margin:0 0 7px;font-size:17px;font-weight:800;letter-spacing:-.025em;}
+  .panel .lead { margin:0 0 18px;color:#778791;font-size:12px;line-height:1.6; }
+  .field { display:grid;gap:6px;margin-bottom:16px; }
+  .field label { font-size:11px;font-weight:800;color:#4d6878;letter-spacing:.015em; }
+  .field input:not([type="range"]):not([type="color"]), .field textarea, .field select { width:100%;padding:10px 11px;background:#fffefa;border:1px solid #d8dfdc;border-radius:9px;min-height:40px;color:#283d49;font-size:12px;outline-offset:1px; }
+  .field textarea { min-height:76px;resize:vertical;line-height:1.55; }
+  .field input:focus,.field textarea:focus { border-color:#93b3c4; }
+  .inline-fields { display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:9px; }
+  .segment-label { display:flex;justify-content:space-between;align-items:center;gap:9px;margin:18px 0 10px;padding-top:17px;border-top:1px solid #e3e2dd; }
+  .segment-label h4 {margin:0;font-size:13px;font-weight:850;}
+  .segment-label span {font-size:10px;color:#88969b;}
+  .habit-list { display:grid;gap:9px; }
+  .habit-item { border:1px solid #dedfd9;border-radius:11px;background:white;padding:10px; }
+  .habit-item .habit-meta { display:flex;gap:6px;justify-content:space-between;margin-bottom:8px;align-items:center; }
+  .habit-id { font-size:10px;color:#8296a0;font-weight:800; }
+  .icon-button { min-width:24px;min-height:24px;border:0;background:#eff3f0;color:#6d7e86;border-radius:6px;display:inline-grid;place-items:center;font-size:14px;padding:1px; }
+  .icon-button:hover {background:#dce9e9;color:#244e65;}
+  .icon-button.danger:hover{background:#f8e2df;color:#9b4b4b;}
+  .habit-controls { display:flex;gap:3px; }
+  .habit-input {display:grid;grid-template-columns:78px 1fr;gap:7px;}
+  .habit-input input { width:100%;min-width:0;border:1px solid #d9dfdc;border-radius:7px;padding:8px 9px;color:#314854;background:#fdfdfa;font-size:11px; }
+  .habit-input input[type="time"] { padding:7px 4px; }
+  .add-habit { width:100%;background:#e8efec;color:#3b6470;border:1px dashed #b9d0cd;border-radius:9px;padding:10px;text-align:center;font-size:11px;font-weight:850;margin-top:9px; }
+  .add-habit:hover {background:#dbece9;}
+  .doodle-grid { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:14px 0 18px; }
+  .doodle-button {display:grid;place-items:center;gap:7px;background:white;border:1px solid #dedfd8;border-radius:11px;padding:12px 4px;color:#59718a;min-height:93px;}
+  .doodle-button:hover {background:#e7eff1;border-color:#aac3cf;}
+  .doodle-button svg {width:38px;height:38px;}
+  .doodle-button small {font-size:10px;color:#60727b;}
+  .help { font-size:11px;line-height:1.6;color:#768892; }
+  .selected-tools {border:1px solid #c5d7d9;background:#edf4f2;border-radius:13px;padding:14px;margin-top:14px;}
+  .selected-tools h4 {font-size:13px;margin:0 0 13px;}
+  .selected-tools .field {margin-bottom:12px;}
+  .range-wrap {display:flex;align-items:center;gap:12px;}
+  .range-wrap input[type="range"] {flex:1;min-width:0;accent-color:#3f7488;}
+  .range-wrap output {min-width:36px;font-size:11px;text-align:right;color:#506f7d;}
+  .color-row { display:flex;align-items:center;gap:7px; }
+  .swatch {width:24px;height:24px;border-radius:50%;border:2px solid white;outline:1px solid #cbd0ce;cursor:pointer;}
+  .swatch[aria-pressed="true"]{outline:3px solid #759daf;outline-offset:1px;}
+  .model-list {display:grid;gap:10px;margin-bottom:17px;}
+  .model-item {background:#fff;border:1px solid #dfded7;border-radius:11px;padding:12px;display:flex;justify-content:space-between;align-items:flex-start;gap:9px;}
+  .model-item.active{border-color:#86b3be;background:#eaf2f2;}
+  .model-main {text-align:left;background:none;border:0;padding:0;flex:1;color:inherit;min-width:0;}
+  .model-main strong {font-size:12px;display:block;overflow-wrap:anywhere;}
+  .model-main small {display:block;font-size:10px;color:#7c8e98;margin-top:5px;}
+  .model-actions {display:flex;gap:4px;}
+  .model-new {width:100%;display:grid;grid-template-columns:1fr;gap:9px;}
+  .model-choice {text-align:left;border:1px solid #dbe2e0;background:white;padding:12px 13px;border-radius:10px;color:#34586b;display:grid;gap:5px;}
+  .model-choice:hover{background:#e9f2f2;}
+  .model-choice strong {font-size:12px;}
+  .model-choice span {font-size:11px;color:#718490;}
+  .settings-row {display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid #e2e4df;padding:12px 0;}
+  .settings-row span {font-size:12px;color:#4a6571;}
+  .settings-row input[type="checkbox"]{accent-color:#376680;width:17px;height:17px;}
+  .setting-group {padding:17px 0;border-top:1px solid #e3e2dd;margin-top:17px;}
+  .setting-group h4 {margin:0 0 12px;font-size:13px;}
+  .setting-actions {display:grid;gap:9px;}
+  .setting-actions button {width:100%;}
+  .preview-area {min-width:0;padding:19px clamp(15px,3.1vw,52px) 54px;background:radial-gradient(ellipse at top,#faf9f3 0%,#f1efe7 75%);}
+  .preview-toolbar {max-width:830px;margin:0 auto 16px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;}
+  .preview-caption {display:grid;gap:4px;}
+  .preview-caption strong {font-size:13px;}
+  .preview-caption small {font-size:11px;color:#8b9799;}
+  .preview-actions {display:flex;align-items:center;gap:7px;}
+  .paper-stage { display:flex;justify-content:center;align-items:flex-start;overflow:visible;padding:0 0 6px; }
+  .notebook { width:min(100%,795px);min-height:1040px;aspect-ratio:210/297;position:relative;overflow:hidden;background-color:#fffefa;background-image:repeating-linear-gradient(to bottom,transparent 0,transparent 31px,rgba(101,151,191,.30) 31px,rgba(101,151,191,.30) 32px);background-position:0 108px;background-size:100% 32px;border:1px solid #e5e1d8;border-radius:4px 10px 11px 4px;box-shadow:var(--shadow),-7px 0 0 #e8e6df,-11px 0 0 #d5d7d3;color:#233d50;isolation:isolate; }
+  .notebook:before { content:"";position:absolute;top:0;bottom:0;left:75px;border-left:2px solid rgba(203,99,94,.44);z-index:0;pointer-events:none; }
+  .notebook:after {content:"";position:absolute;left:12px;top:23px;bottom:23px;width:16px;opacity:.72;background:radial-gradient(circle at center,#d7d9d4 0 4px,transparent 4.5px) center top / 16px 51px repeat-y;pointer-events:none;z-index:0;}
+  .notebook-content {position:relative;z-index:1;padding:31px 35px 48px 107px;min-height:100%;}
+  .paper-upper {display:flex;justify-content:space-between;gap:10px;align-items:center;border-bottom:1px solid #a8c1d0;padding:0 0 12px;min-height:31px;}
+  .paper-kicker {font-size:10px;letter-spacing:.16em;font-weight:800;color:#738f9d;}
+  .paper-number {font-size:10px;color:#748b96;white-space:nowrap;}
+  .paper-title {font-family:Georgia,"Times New Roman",serif;letter-spacing:-.035em;line-height:1.2;font-size:32px;margin:21px 0 7px;font-weight:700;color:#254358;overflow-wrap:anywhere;}
+  .paper-subtitle {color:#6f8794;font-size:12px;margin:0 0 13px;line-height:1.55;}
+  .paper-week {font-size:11px;color:#365d74;background:rgba(227,237,240,.55);border:1px solid #d5e3e9;border-radius:6px;display:inline-block;padding:6px 9px;margin:3px 0 18px;}
+  .paper-block-title {text-transform:uppercase;letter-spacing:.125em;font-size:10px;color:#41677f;font-weight:850;margin:13px 0 10px;}
+  .paper-goal {min-height:55px;white-space:pre-wrap;overflow-wrap:anywhere;line-height:30px;font-size:12px;padding:2px 5px;}
+  .paper-section {margin:14px 0 19px;}
+  .paper-section-head {display:flex;align-items:center;justify-content:space-between;gap:8px;padding:4px 1px 7px;}
+  .paper-section-head h3 {font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:#2d576d;margin:0;font-weight:900;}
+  .paper-section-head span {font-size:10px;font-style:italic;color:#7a96a3;}
+  .paper-table {width:100%;border-collapse:collapse;border:1px solid rgba(119,158,184,.34);table-layout:fixed;background:rgba(255,255,255,.68);font-size:11px;}
+  .paper-table th {font-size:9px;letter-spacing:.02em;background:rgba(213,229,239,.67);color:#486f82;border:1px solid rgba(119,158,184,.34);font-weight:800;padding:7px 3px;}
+  .paper-table th.task {text-align:left;padding-left:9px;width:36%;}
+  .paper-table th.hour {width:13%;}
+  .paper-table th.day {width:7.3%;}
+  .paper-table td {border:1px solid rgba(119,158,184,.29);padding:7px 5px;line-height:1.35;color:#2d4755;min-height:29px;overflow-wrap:anywhere;vertical-align:middle;}
+  .paper-table td.time {font-size:9px;text-align:center;white-space:nowrap;color:#718995;}
+  .paper-table td.boxcell {text-align:center;color:#718d9d;}
+  .paper-table .empty-square {display:inline-block;width:10px;height:10px;border:1.2px solid #789aaf;border-radius:1.5px;background:#fff;vertical-align:middle;}
+  .empty-period {margin:0;color:#80929c;font-size:10px;font-style:italic;padding:8px 0 10px;}
+  .paper-observations {margin-top:18px;}
+  .note-lines {min-height:105px;background:repeating-linear-gradient(to bottom,transparent 0,transparent 30px,rgba(119,158,184,.36) 30px,rgba(119,158,184,.36) 31px);}
+  .paper-footer {margin-top:30px;display:flex;justify-content:space-between;gap:15px;align-items:flex-end;font-size:11px;color:#607989;}
+  .sign-wrap {min-width:170px;width:38%;text-align:center;font-size:10px;}
+  .sign-wrap .sign-line {border-bottom:1px solid #7996a5;height:27px;margin-bottom:5px;}
+  .paper-doodle {position:absolute;z-index:3;display:flex;align-items:center;justify-content:center;cursor:grab;touch-action:none;user-select:none;border:1px dashed transparent;border-radius:4px; transform:translate(-50%,-50%);}
+  .paper-doodle svg {width:100%;height:100%;display:block;overflow:visible;}
+  .paper-doodle.selected {border:1px dashed #3982a4;background:rgba(226,239,248,.32);}
+  .paper-doodle:active{cursor:grabbing;}
+  .preview-notice {max-width:830px;margin:15px auto 0;font-size:11px;color:#7c8e95;line-height:1.55;display:flex;justify-content:center;gap:6px;text-align:center;}
+  .warning { color:#a54b3d;display:none;font-size:11px;text-align:center;max-width:830px;margin:12px auto 0;background:#fff0e7;padding:10px;border:1px solid #edc5ba;border-radius:9px; }
+  .warning.show{display:block;}
+  .toast {position:fixed;bottom:24px;left:50%;z-index:100;transform:translate(-50%,12px);opacity:0;pointer-events:none;background:#263e4f;color:white;border-radius:10px;padding:11px 17px;font-size:12px;transition:.2s;box-shadow:0 9px 25px #0002;max-width:calc(100vw - 32px);text-align:center;}
+  .toast.show {transform:translate(-50%,0);opacity:1;}
+  .sr-only {position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+  @media(max-width:1090px){.app{grid-template-columns:minmax(270px,310px) minmax(0,1fr)} .notebook{min-height:840px;} .notebook-content{padding:25px 20px 43px 85px;} .notebook:before{left:61px;} .notebook:after{left:10px;} .paper-title{font-size:27px;} .paper-table{font-size:10px;} .paper-table th.task{width:33%;} .paper-table th.hour{width:16%;} }
+  @media(max-width:760px){
+    .topbar{padding:11px 15px;align-items:flex-start;}
+    .brand h1{font-size:18px;}
+    .brand p{font-size:10px;white-space:normal;}
+    .top-actions{gap:6px;}
+    .save-state{display:none;}
+    .top-actions .btn{font-size:11px;min-height:36px;padding:8px 10px;}
+    .app{display:flex;flex-direction:column;}
+    .control-side{border-right:0;border-bottom:1px solid #dddcd5;}
+    .control-side-inner{height:auto;min-height:0;position:static;}
+    .control-intro{padding:15px 18px 11px;}
+    .control-intro h2{font-size:23px;margin-top:5px;}
+    .tabbar{padding:0 13px 9px;}
+    .tab{display:flex;justify-content:center;gap:6px;font-size:11px;}
+    .tab svg{height:17px;width:17px;}
+    .panel-scroll{height:auto;max-height:420px;padding:15px 17px 24px;overflow:auto;}
+    .preview-area{padding:15px 11px 40px;}
+    .notebook{min-height:0;aspect-ratio:210/297;}
+    .notebook-content{padding:24px 19px 35px 74px;}
+    .notebook:before{left:55px;}
+    .notebook:after{left:8px;background-size:12px 42px;}
+    .paper-title{font-size:25px;}
+    .paper-table{font-size:10px;}
+    .paper-table td{padding:5px 2px;}
+  }
+  @media(max-width:480px){
+    .topbar{gap:8px;}
+    .brandmark{width:34px;height:38px;font-size:20px;}
+    .brand{gap:8px;}
+    .brand h1{font-size:17px;letter-spacing:.1em;}
+    .brand p{font-size:9px;}
+    .top-actions .btn.secondary-top{display:none;}
+    .preview-toolbar{gap:9px;}
+    .preview-toolbar strong{font-size:12px;}
+    .preview-actions .btn{font-size:10px;padding:6px 8px;min-height:33px;}
+    .notebook-content{padding:18px 11px 28px 47px;}
+    .notebook:before{left:37px;border-left-width:1px;}
+    .notebook:after{left:4px;width:9px;background-size:9px 32px;background-image:radial-gradient(circle at center,#d7d9d4 0 2.8px,transparent 3px);}
+    .notebook{background-position:0 75px;background-size:100% 24px;background-image:repeating-linear-gradient(to bottom,transparent 0,transparent 23px,rgba(101,151,191,.29) 23px,rgba(101,151,191,.29) 24px);}
+    .paper-kicker{font-size:7px;}
+    .paper-number{font-size:8px;}
+    .paper-upper{padding-bottom:8px;}
+    .paper-title{font-size:19px;margin:10px 0 4px;}
+    .paper-subtitle{font-size:9px;margin-bottom:5px;}
+    .paper-week{font-size:8px;padding:3px 5px;margin-bottom:8px;}
+    .paper-block-title{font-size:8px;margin:7px 0 3px;}
+    .paper-goal{font-size:9px;min-height:28px;line-height:22px;}
+    .paper-section{margin:8px 0 10px;}
+    .paper-section-head{padding:3px 0;}
+    .paper-section-head h3{font-size:10px;}
+    .paper-section-head span{font-size:8px;}
+    .paper-table{font-size:8px;}
+    .paper-table th{font-size:7px;padding:5px 1px;}
+    .paper-table th.task{padding-left:4px;width:33%;}
+    .paper-table th.hour{width:16%;}
+    .paper-table td{font-size:8px;padding:4px 2px;}
+    .paper-table td.time{font-size:7px;}
+    .paper-table .empty-square{width:7px;height:7px;border-width:1px;}
+    .paper-observations{margin-top:10px;}
+    .note-lines{min-height:64px;background-size:100% 23px;}
+    .paper-footer{font-size:8px;margin-top:16px;}
+    .sign-wrap{min-width:70px;font-size:8px;}
+    .sign-wrap .sign-line{height:18px;}
+  }
+  @media print {
+    @page { size:A4 portrait; margin:0; }
+    html,body { background:white!important;margin:0!important;padding:0!important;width:210mm!important;height:auto!important;min-height:0!important;overflow:visible!important; }
+    .topbar,.control-side,.preview-toolbar,.preview-notice,.warning,.toast { display:none!important; }
+    .app,.preview-area,.paper-stage { display:block!important;margin:0!important;padding:0!important;background:white!important;width:210mm!important;height:297mm!important;max-width:none!important;min-height:0!important;overflow:hidden!important; }
+    .notebook {width:210mm!important;height:297mm!important;min-height:297mm!important;max-height:297mm!important;aspect-ratio:auto!important;margin:0!important;border:none!important;box-shadow:none!important;border-radius:0!important;background:#fffefa!important;background-image:repeating-linear-gradient(to bottom,transparent 0,transparent 31px,rgba(101,151,191,.30) 31px,rgba(101,151,191,.30) 32px)!important;background-position:0 108px!important;background-size:100% 32px!important;print-color-adjust:exact!important;-webkit-print-color-adjust:exact!important;}
+    .notebook-content {padding:31px 35px 35px 107px!important;}
+    .notebook:before {left:75px!important;}
+    .notebook:after {left:12px!important;background-size:16px 51px!important;}
+    .paper-upper{padding-bottom:12px!important;}
+    .paper-kicker{font-size:10px!important;}
+    .paper-number{font-size:10px!important;}
+    .paper-title{font-size:32px!important;margin:21px 0 7px!important;}
+    .paper-subtitle{font-size:12px!important;margin:0 0 13px!important;}
+    .paper-week{font-size:11px!important;padding:6px 9px!important;margin:3px 0 18px!important;}
+    .paper-block-title{font-size:10px!important;margin:13px 0 10px!important;}
+    .paper-goal{font-size:12px!important;line-height:30px!important;min-height:55px!important;}
+    .paper-section{margin:14px 0 19px!important;}
+    .paper-section-head h3{font-size:13px!important;}
+    .paper-section-head span{font-size:10px!important;}
+    .paper-table{font-size:11px!important;}
+    .paper-table th{font-size:9px!important;padding:7px 3px!important;}
+    .paper-table th.task{width:36%!important;}
+    .paper-table th.hour{width:13%!important;}
+    .paper-table td{font-size:11px!important;padding:7px 5px!important;}
+    .paper-table td.time{font-size:9px!important;}
+    .paper-table .empty-square{width:10px!important;height:10px!important;}
+    .paper-observations{margin-top:18px!important;}
+    .note-lines{min-height:105px!important;background-size:100% 31px!important;}
+    .paper-footer{font-size:11px!important;margin-top:30px!important;}
+    .sign-wrap{font-size:10px!important;min-width:170px!important;}
+    .sign-wrap .sign-line{height:27px!important;}
+    .paper-doodle {border-color:transparent!important;background:none!important;}
+  }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand" aria-label="MARGEM: seu caderno, do seu jeito">
+      <div class="brandmark" aria-hidden="true">M</div>
+      <div><h1>MARGEM</h1><p>Seu caderno, do seu jeito.</p></div>
+    </div>
+    <div class="top-actions">
+      <span class="save-state" id="saveState" aria-live="polite">Salvo neste dispositivo</span>
+      <button type="button" class="btn secondary-top" id="backupTop">Salvar cópia</button>
+      <button type="button" class="btn primary" id="pdfTop">Gerar PDF <span aria-hidden="true">↗</span></button>
+    </div>
+  </header>
+  <div class="app">
+    <aside class="control-side" aria-label="Ferramentas de edição">
+      <div class="control-side-inner">
+        <div class="control-intro"><div class="eyebrow">Meu espaço de criação</div><h2>Um cuidado de cada vez.</h2><p>Crie sua folha aqui. Depois, copie à mão e deixe-a por perto.</p></div>
+        <div class="tabbar" role="tablist" aria-label="Ferramentas do caderno">
+          <button role="tab" class="tab" data-tab="sheet" aria-selected="true" aria-controls="panel-sheet"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h14v18H5zM8 8h8M8 12h8M8 16h6"/></svg>Folha</button>
+          <button role="tab" class="tab" data-tab="draw" aria-selected="false" aria-controls="panel-draw"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 20 5-1 11-11-4-4L5 15l-1 5ZM14 6l4 4M7 16l2 2"/></svg>Desenhos</button>
+          <button role="tab" class="tab" data-tab="models" aria-selected="false" aria-controls="panel-models"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h11v15H4zM9 7h11v14H9"/></svg>Modelos</button>
+          <button role="tab" class="tab" data-tab="settings" aria-selected="false" aria-controls="panel-settings"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2.1 2.1M17 17l2.1 2.1M19 5l-2.1 2.1M7 17l-2.1 2.1"/></svg>Ajustes</button>
+        </div>
+        <div class="panel-scroll">
+          <section id="panel-sheet" class="panel active" role="tabpanel" aria-label="Editar folha">
+            <h3>Conteúdo da folha</h3><p class="lead">O que você escrever aqui aparece na prévia imediatamente.</p>
+            <div class="field"><label for="modelTitle">Título da folha</label><input id="modelTitle" data-prop="title" maxlength="84" autocomplete="off" placeholder="Minha rotina de cuidados"></div>
+            <div class="field"><label for="modelGoal">Objetivo pessoal</label><textarea id="modelGoal" data-prop="goal" maxlength="450" placeholder="O que esta folha deve me ajudar a lembrar?"></textarea></div>
+            <div class="inline-fields">
+              <div class="field"><label for="weekDate">Data de referência</label><input type="date" id="weekDate" data-prop="date"></div>
+              <div class="field"><label for="modelFooterDate">Data na assinatura</label><input type="date" id="modelFooterDate" data-prop="footerDate"></div>
+            </div>
+            <div id="habitsEditor"></div>
+            <div class="field" style="margin-top:20px"><label for="modelNotes">Observações para a folha</label><textarea id="modelNotes" data-prop="notes" maxlength="700" placeholder="Escreva uma anotação ou deixe vazio para preencher no papel."></textarea></div>
+          </section>
+          <section id="panel-draw" class="panel" role="tabpanel" aria-label="Desenhos decorativos">
+            <h3>Pequenos desenhos</h3><p class="lead">Escolha um desenho. Depois arraste-o na folha e ajuste seu tamanho. Eles não são adesivos: têm aparência de traço de caneta.</p>
+            <div id="doodlePalette" class="doodle-grid"></div>
+            <div id="selectedDoodleTools" class="selected-tools" hidden></div>
+            <p class="help">Dica: mantenha os desenhos perto das margens para não cobrir o texto. Na impressão, a seleção pontilhada desaparece.</p>
+          </section>
+          <section id="panel-models" class="panel" role="tabpanel" aria-label="Modelos salvos">
+            <h3>Minhas folhas</h3><p class="lead">Tudo fica guardado neste navegador. Uma folha não altera as outras.</p>
+            <div id="modelList" class="model-list"></div>
+            <div class="segment-label"><h4>Criar outra folha</h4></div>
+            <div class="model-new" id="templateChoices"></div>
+          </section>
+          <section id="panel-settings" class="panel" role="tabpanel" aria-label="Configurações e backup">
+            <h3>Detalhes do caderno</h3><p class="lead">O visual continua sendo de caderno escolar; aqui você controla somente os pequenos detalhes.</p>
+            <div class="settings-row"><span>Mostrar horários</span><input type="checkbox" id="showTimes" aria-label="Mostrar horários"></div>
+            <div class="settings-row"><span>Mostrar campos de assinatura</span><input type="checkbox" id="showSignature" aria-label="Mostrar campos de assinatura"></div>
+            <div class="settings-row"><span>Mostrar período da tarde vazio</span><input type="checkbox" id="showEmptyAfternoon" aria-label="Mostrar período da tarde vazio"></div>
+            <div class="field" style="margin-top:16px"><label for="paperShade">Cor da folha</label><select id="paperShade"><option value="natural">Branco natural</option><option value="cream">Creme suave</option></select></div>
+            <div class="setting-group"><h4>Seus modelos e cópias</h4><p class="help">O MARGEM não exige conta, não registra hábitos concluídos e não envia seus textos para um servidor. Se você limpar os dados do navegador, pode perder os modelos: guarde uma cópia em JSON.</p>
+              <div class="setting-actions"><button class="btn" type="button" id="backupSettings">Baixar backup (.json)</button><button class="btn" type="button" id="importSettings">Importar backup (.json)</button><button class="btn primary" type="button" id="pdfSettings">Abrir impressão / PDF</button></div>
+            </div>
+            <div class="setting-group"><h4>Como criar seu PDF</h4><p class="help">Clique em “Gerar PDF” e, na janela de impressão, escolha <b>Salvar como PDF</b>. O documento será uma página A4 com aparência de folha de caderno. Para manter as pautas e os desenhos, ative <b>Gráficos de fundo</b> se o navegador oferecer essa opção.</p></div>
+          </section>
+        </div>
+      </div>
+    </aside>
+    <main class="preview-area">
+      <div class="preview-toolbar">
+        <div class="preview-caption"><strong>Prévia da sua folha</strong><small>Modelo para copiar no caderno de papel · uma página</small></div>
+        <div class="preview-actions"><button class="btn small subtle" type="button" id="copyText">Copiar texto</button><button class="btn small" type="button" id="openDraw">+ Desenho</button><button class="btn primary small" type="button" id="pdfPreview">PDF</button></div>
+      </div>
+      <div class="paper-stage">
+        <article class="notebook" id="notebook" aria-label="Prévia da folha de caderno">
+          <div class="notebook-content" id="paperContent"></div>
+          <div id="paperDoodles"></div>
+        </article>
+      </div>
+      <div class="warning" id="pageWarning" role="status">O conteúdo está ultrapassando o tamanho da folha. Para não cortar nada no PDF, reduza a quantidade de hábitos ou crie outra folha.</div>
+      <p class="preview-notice">Esta plataforma é um editor de modelos, não um aplicativo de cobrança ou controle de hábitos. O acompanhamento é feito à mão, no seu papel.</p>
+    </main>
+  </div>
+  <input type="file" id="backupInput" accept="application/json,.json" hidden>
+  <div class="toast" id="toast" aria-live="polite"></div>
+  <script>
+  (()=>{'use strict';
+    const STORE='margem.caderno.v1';
+    const $=id=>document.getElementById(id);
+    const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    const uid=()=> 'm'+(Date.now().toString(36))+(Math.random().toString(36).slice(2,8));
+    const sectionNames={morning:'MANHÃ',afternoon:'TARDE',night:'NOITE'};
+    const sectionHints={morning:'um começo mais leve',afternoon:'o que me faz bem',night:'fechar o dia com cuidado'};
+    const dayLabels=['Seg','Ter','Qua','Qui','Sex','Sáb','Dom'];
+    const artwork={
+      spider:{label:'Aranha',paths:'<circle cx="30" cy="33" r="8"/><circle cx="30" cy="19" r="5"/><path d="M25 29 15 23 7 26M24 34 12 34 5 40M25 38 15 45 10 54M35 29 45 23 53 26M36 34 48 34 55 40M35 38 45 45 50 54M29 15l-4-8M31 15l4-8"/>'},
+      flower:{label:'Flor',paths:'<circle cx="30" cy="27" r="5"/><path d="M30 21c-10-14-17-5-9 4-16-4-18 9-3 10-7 13 5 19 12 6 8 13 19 7 12-6 16-1 13-14-3-10 8-11 1-18-9-4ZM30 42v16M30 49c-9-9-13-4-9 2M30 53c10-10 15-4 8 2"/>'},
+      star:{label:'Estrela',paths:'<path d="m30 5 6.8 17.5L55 24l-14 11.5L45 54 30 44 15 54l4-18.5L5 24l18.2-1.5z"/><path d="M11 7v8M7 11h8M51 43v10M46 48h10"/>'},
+      flame:{label:'Chama',paths:'<path d="M30 56c-14 0-22-10-20-23 1-9 9-14 11-23 7 8 7 14 5 20 7-4 12-12 12-24 16 18 14 26 13 32-1 11-10 18-21 18Z"/><path d="M30 54c-7 0-11-5-9-11 1-5 6-8 7-14 6 6 4 10 3 12 6-1 7-7 7-10 9 11 2 23-8 23Z"/>'},
+      moon:{label:'Lua',paths:'<path d="M42 9A23 23 0 1 0 51 47 23 23 0 0 1 42 9Z"/><path d="M13 9v8M9 13h8M50 18v7M46.5 21.5h7M47 51v6M44 54h6"/>'},
+      branch:{label:'Galho',paths:'<path d="M8 54C16 34 27 30 51 10"/><path d="M18 39C7 41 8 28 11 25c11-2 15 2 15 7M27 30c-2-14 7-16 13-14 1 10-3 16-13 14ZM34 24c6 2 14 2 20-8M14 46c7 0 15 2 16 11-12 4-15-1-16-11Z"/>'},
+      scribble:{label:'Rabisco',paths:'<path d="M7 29c11-19 20 23 30 0S56 20 52 37M7 44c12-14 25 14 46-7M14 16l4 5M42 11l5 4"/>'},
+      character:{label:'Personagem',paths:'<circle cx="30" cy="17" r="10"/><path d="M20 27c-6 8-8 15-8 24M40 27c6 8 8 15 8 24M21 31c8 5 10 5 18 0M24 28l-3 16M36 28l3 16M21 44l-5 12M39 44l5 12M25 15h1M34 15h1M27 21c2 2 4 2 6 0"/>'},
+      candle:{label:'Vela',paths:'<path d="M18 29h24v27H18zM15 57h30M30 29v-7M30 5c-6 8-6 12 0 15 6-3 6-7 0-15ZM22 34v13M38 34v13"/>'},
+      pentagram:{label:'Pentagrama',paths:'<circle cx="30" cy="30" r="24"/><path d="m30 10 12 38-32-23h40L18 48Z"/>'}
+    };
+    const drawingSVG=(type)=>'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+(artwork[type]?.paths||artwork.star.paths)+'</svg>';
+    function isoToday(){const d=new Date();const yyyy=d.getFullYear(),mm=String(d.getMonth()+1).padStart(2,'0'),dd=String(d.getDate()).padStart(2,'0');return `${yyyy}-${mm}-${dd}`;}
+    const habit=(text,time='')=>({id:uid(),text,time});
+    function makeModel(kind='care'){
+      let parts={morning:[],afternoon:[],night:[]},title='Minha rotina de cuidados',goal='Cuidar de mim com atenção, um hábito de cada vez.';
+      if(kind==='care'){parts.morning=[habit('Arrumar a cama ao acordar'),habit('Cuidar da aparência')];parts.night=[habit('Tomar banho à noite'),habit('Usar creme corporal'),habit('Escovar os dentes antes de dormir')];}
+      if(kind==='simple'){title='O essencial para mim';goal='Não preciso fazer tudo. Vou começar pelo que importa.';parts.morning=[habit('Arrumar a cama')];parts.night=[habit('Tomar banho'),habit('Escovar os dentes')];}
+      if(kind==='blank'){title='Minha folha';goal='';}
+      return {id:uid(),title,goal,date:isoToday(),footerDate:'',notes:'',parts,doodles:[],settings:{showTimes:true,showSignature:true,showEmptyAfternoon:true,shade:'natural'},created:Date.now(),updated:Date.now()};
+    }
+    let state={version:1,models:[makeModel('care')],activeId:null};state.activeId=state.models[0].id;
+    function cleanModel(obj){
+      const model=makeModel('blank');
+      model.id=typeof obj.id==='string'&&obj.id.length<100?obj.id:uid();
+      model.title=String(obj.title??'Minha folha').slice(0,84);
+      model.goal=String(obj.goal??'').slice(0,450);
+      model.date=/^\d{4}-\d{2}-\d{2}$/.test(obj.date)?obj.date:isoToday();
+      model.footerDate=/^\d{4}-\d{2}-\d{2}$/.test(obj.footerDate)?obj.footerDate:'';
+      model.notes=String(obj.notes??'').slice(0,700);
+      for(const k of Object.keys(model.parts)){model.parts[k]=Array.isArray(obj.parts?.[k])?obj.parts[k].slice(0,40).map(h=>({id:typeof h.id==='string'?h.id.slice(0,80):uid(),text:String(h.text??'').slice(0,150),time:/^([01]\d|2[0-3]):[0-5]\d$/.test(h.time)?h.time:''})):[];}
+      model.doodles=Array.isArray(obj.doodles)?obj.doodles.slice(0,40).filter(d=>artwork[d.type]).map(d=>({id:typeof d.id==='string'?d.id.slice(0,80):uid(),type:d.type,x:clamp(Number(d.x)||50,3,97),y:clamp(Number(d.y)||50,3,97),size:clamp(Number(d.size)||48,20,110),angle:clamp(Number(d.angle)||0,-180,180),color:['#59718a','#536160','#876d82','#93685f'].includes(d.color)?d.color:'#59718a'})):[];
+      model.settings={showTimes:obj.settings?.showTimes!==false,showSignature:obj.settings?.showSignature!==false,showEmptyAfternoon:obj.settings?.showEmptyAfternoon!==false,shade:obj.settings?.shade==='cream'?'cream':'natural'};
+      model.created=Number(obj.created)||Date.now();model.updated=Number(obj.updated)||Date.now();return model;
+    }
+    const clamp=(v,min,max)=>Math.min(max,Math.max(min,v));
+    try{const saved=JSON.parse(localStorage.getItem(STORE)||'null');if(saved&&Array.isArray(saved.models)&&saved.models.length){state={version:1,models:saved.models.slice(0,100).map(cleanModel),activeId:saved.activeId};if(!state.models.some(m=>m.id===state.activeId))state.activeId=state.models[0].id;}}catch(e){console.warn('Não foi possível abrir o armazenamento local.',e);}
+    let selectedDoodle=null,tab='sheet',saveTimer=null;
+    const model=()=>state.models.find(m=>m.id===state.activeId)||state.models[0];
+    function persist(){try{localStorage.setItem(STORE,JSON.stringify(state));$('saveState').textContent='Salvo neste dispositivo';}catch(e){$('saveState').textContent='Sem espaço para salvar';toast('Não foi possível salvar. Exporte um backup.');}}
+    function save(){model().updated=Date.now();$('saveState').textContent='Salvando...';clearTimeout(saveTimer);saveTimer=setTimeout(persist,250);}
+    let toastTimer;
+    function toast(msg){$('toast').textContent=msg;$('toast').classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').classList.remove('show'),2600);}
+    function weekRange(iso){let d=new Date((iso||isoToday())+'T12:00:00');if(Number.isNaN(d.getTime()))d=new Date();const mon=new Date(d);mon.setDate(d.getDate() - (d.getDay()+6)%7);const sun=new Date(mon);sun.setDate(mon.getDate()+6);const fmt=x=>String(x.getDate()).padStart(2,'0')+'/'+String(x.getMonth()+1).padStart(2,'0')+'/'+x.getFullYear();return `${fmt(mon)} — ${fmt(sun)}`;}
+    const localDate=iso=>/^\d{4}-\d{2}-\d{2}$/.test(iso||'')?iso.split('-').reverse().join('/'):'____ / ____ / ____';
+    function renderPaper(){
+      const m=model(),parts=m.parts,showTimes=m.settings.showTimes;
+      const header='<div class="paper-upper"><span class="paper-kicker">MARGEM · MEU CADERNO</span><span class="paper-number">FOLHA DE CUIDADOS</span></div>';
+      let content=header+`<h2 class="paper-title">${esc(m.title||'Minha folha')}</h2><p class="paper-subtitle">Pequenos cuidados também merecem um lugar na rotina.</p><div class="paper-week">Semana: ${esc(weekRange(m.date))}</div><div class="paper-block-title">Meu objetivo</div><div class="paper-goal">${esc(m.goal||' ')}</div>`;
+      for(const key of Object.keys(sectionNames)){
+        const items=parts[key];if(key==='afternoon'&&!items.length&&!m.settings.showEmptyAfternoon)continue;
+        content+=`<section class="paper-section"><div class="paper-section-head"><h3>${sectionNames[key]}</h3><span>${sectionHints[key]}</span></div>`;
+        if(items.length){
+          content+='<table class="paper-table"><thead><tr><th class="task" scope="col">Meu cuidado</th>'+(showTimes?'<th class="hour" scope="col">Hora</th>':'')+dayLabels.map(d=>`<th class="day" scope="col">${d}</th>`).join('')+'</tr></thead><tbody>';
+          for(const h of items)content+=`<tr><td>${esc(h.text)||'________________'}</td>${showTimes?'<td class="time">'+esc(h.time||'—')+'</td>':''}${dayLabels.map(()=>'<td class="boxcell"><span class="empty-square" aria-hidden="true"></span></td>').join('')}</tr>`;
+          content+='</tbody></table>';
+        } else content+='<p class="empty-period">Espaço livre para acrescentar um cuidado.</p>';
+        content+='</section>';
+      }
+      content+='<section class="paper-observations"><div class="paper-block-title">Observações</div>';
+      if(m.notes)content+=`<div class="paper-goal">${esc(m.notes)}</div>`;
+      content+='<div class="note-lines" aria-hidden="true"></div></section>';
+      if(m.settings.showSignature)content+=`<div class="paper-footer"><span>Data: ${esc(localDate(m.footerDate))}</span><div class="sign-wrap"><div class="sign-line"></div>Minha assinatura</div></div>`;
+      $('paperContent').innerHTML=content;
+      $('notebook').style.backgroundColor=m.settings.shade==='cream'?'#fff8e7':'#fffefa';
+      $('paperDoodles').innerHTML=m.doodles.map(d=>`<div class="paper-doodle${selectedDoodle===d.id?' selected':''}" data-doodle-id="${esc(d.id)}" role="button" tabindex="0" aria-label="Mover desenho: ${artwork[d.type].label}" style="left:${d.x}%;top:${d.y}%;width:${d.size}px;height:${d.size}px;color:${d.color}"><span style="width:100%;height:100%;display:block;transform:rotate(${d.angle}deg)">${drawingSVG(d.type)}</span></div>`).join('');
+      requestAnimationFrame(checkOverflow);
+    }
+    function checkOverflow(){const paper=$('notebook');const contents=$('paperContent');if(!paper||!contents)return;const last=contents.lastElementChild;const bottom=last?last.getBoundingClientRect().bottom-paper.getBoundingClientRect().top:0;const allowed=paper.clientHeight-18;$('pageWarning').classList.toggle('show',bottom>allowed);}
+    function renderHeaderEditor(){const m=model();for(const key of ['title','goal','date','footerDate','notes']){const el=document.querySelector('[data-prop="'+key+'"]');if(el)el.value=m[key]||'';}}
+    function renderHabitEditor(){const m=model();$('habitsEditor').innerHTML=Object.keys(sectionNames).map(key=>`<div class="segment-label"><h4>${sectionNames[key].charAt(0)+sectionNames[key].slice(1).toLowerCase()}</h4><span>${m.parts[key].length} hábito(s)</span></div><div class="habit-list">${m.parts[key].map((h,index)=>`<div class="habit-item" data-habit-id="${esc(h.id)}" data-period="${key}"><div class="habit-meta"><span class="habit-id">CUIDADO ${String(index+1).padStart(2,'0')}</span><div class="habit-controls"><button class="icon-button" type="button" data-habit-act="up" title="Subir" aria-label="Mover hábito para cima" ${index===0?'disabled':''}>↑</button><button class="icon-button" type="button" data-habit-act="down" title="Descer" aria-label="Mover hábito para baixo" ${index===m.parts[key].length-1?'disabled':''}>↓</button><button class="icon-button danger" type="button" data-habit-act="delete" title="Excluir hábito" aria-label="Excluir hábito">×</button></div></div><div class="habit-input"><input type="time" data-habit-field="time" value="${esc(h.time)}" aria-label="Horário do hábito"><input type="text" data-habit-field="text" maxlength="150" value="${esc(h.text)}" placeholder="O que quero fazer" aria-label="Descrição do hábito"></div></div>`).join('')}</div><button class="add-habit" type="button" data-add="${key}">+ Adicionar hábito</button>`).join('');}
+    function renderDoodlePalette(){$('doodlePalette').innerHTML=Object.entries(artwork).map(([key,item])=>`<button type="button" class="doodle-button" data-add-doodle="${key}" aria-label="Adicionar desenho de ${item.label}">${drawingSVG(key)}<small>${item.label}</small></button>`).join('');}
+    const swatches=['#59718a','#536160','#876d82','#93685f'];
+    function renderSelectedTools(){const d=model().doodles.find(x=>x.id===selectedDoodle),el=$('selectedDoodleTools');el.hidden=!d;if(!d)return;el.innerHTML=`<h4>${artwork[d.type].label} selecionado</h4><div class="field"><label for="doodleSize">Tamanho</label><div class="range-wrap"><input id="doodleSize" type="range" min="20" max="110" step="1" data-doodle-prop="size" value="${d.size}"><output>${d.size}px</output></div></div><div class="field"><label for="doodleAngle">Rotação</label><div class="range-wrap"><input id="doodleAngle" type="range" min="-180" max="180" step="5" data-doodle-prop="angle" value="${d.angle}"><output>${d.angle}°</output></div></div><div class="field"><label>Cor da caneta</label><div class="color-row">${swatches.map(c=>`<button type="button" class="swatch" style="background:${c}" data-doodle-color="${c}" aria-label="Usar cor ${c}" aria-pressed="${d.color===c}"></button>`).join('')}</div></div><button type="button" class="btn danger small" id="removeDoodle">Remover desenho</button>`;}
+    function renderModels(){const m=model();$('modelList').innerHTML=state.models.slice().sort((a,b)=>b.updated-a.updated).map(it=>`<div class="model-item ${it.id===state.activeId?'active':''}"><button class="model-main" type="button" data-model="${esc(it.id)}"><strong>${esc(it.title)||'Folha sem título'}</strong><small>${it.id===state.activeId?'Editando agora':'Abrir modelo'}</small></button><div class="model-actions"><button class="icon-button" type="button" data-model-action="duplicate" data-id="${esc(it.id)}" aria-label="Duplicar ${esc(it.title)}" title="Duplicar">⧉</button><button class="icon-button danger" type="button" data-model-action="delete" data-id="${esc(it.id)}" aria-label="Excluir ${esc(it.title)}" title="Excluir">×</button></div></div>`).join('');
+      $('templateChoices').innerHTML=[['care','Rotina de cuidados','Cinco hábitos para manhã e noite.'],['simple','Rotina essencial','Começar com apenas três hábitos.'],['blank','Folha em branco','Montar sua organização do zero.']].map(([id,title,desc])=>`<button class="model-choice" data-template="${id}" type="button"><strong>+ ${title}</strong><span>${desc}</span></button>`).join('');
+    }
+    function renderSettings(){const m=model();$('showTimes').checked=m.settings.showTimes;$('showSignature').checked=m.settings.showSignature;$('showEmptyAfternoon').checked=m.settings.showEmptyAfternoon;$('paperShade').value=m.settings.shade;}
+    function fullRender(){renderHeaderEditor();renderHabitEditor();renderModels();renderSettings();renderSelectedTools();renderPaper();}
+    function switchTab(name){tab=name;document.querySelectorAll('[data-tab]').forEach(btn=>btn.setAttribute('aria-selected',String(btn.dataset.tab===name)));document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active',p.id==='panel-'+name));if(name==='draw')renderSelectedTools();if(name==='models')renderModels();}
+    function addHabit(key){model().parts[key].push(habit(''));renderHabitEditor();renderPaper();save();const inputs=document.querySelectorAll(`[data-period="${key}"] [data-habit-field="text"]`);inputs[inputs.length-1]?.focus();}
+    function addDoodle(type){const m=model();const index=m.doodles.length,spots=[[87,12],[14,86],[88,86],[16,15],[76,54],[21,60]];const p=spots[index%spots.length];const d={id:uid(),type,x:p[0],y:p[1],size:48,angle:0,color:'#59718a'};m.doodles.push(d);selectedDoodle=d.id;renderSelectedTools();renderPaper();save();toast('Desenho adicionado. Arraste para posicionar.');}
+    function duplicateModel(id){const other=state.models.find(x=>x.id===id);if(!other)return;const copy=cleanModel(JSON.parse(JSON.stringify(other)));copy.id=uid();copy.title=(copy.title+' (cópia)').slice(0,84);copy.created=Date.now();copy.updated=Date.now();copy.doodles.forEach(d=>d.id=uid());Object.values(copy.parts).forEach(arr=>arr.forEach(h=>h.id=uid()));state.models.push(copy);state.activeId=copy.id;selectedDoodle=null;fullRender();switchTab('sheet');save();toast('Modelo duplicado.');}
+    function deleteModel(id){const item=state.models.find(x=>x.id===id);if(!item)return;if(state.models.length===1){toast('Mantenha pelo menos uma folha.');return;}if(!confirm(`Excluir a folha "${item.title}"? Esta ação não pode ser desfeita.`))return;state.models=state.models.filter(x=>x.id!==id);if(state.activeId===id){state.activeId=state.models[0].id;selectedDoodle=null;}fullRender();save();toast('Folha excluída.');}
+    function createTemplate(kind){const fresh=makeModel(kind);state.models.push(fresh);state.activeId=fresh.id;selectedDoodle=null;fullRender();switchTab('sheet');save();toast('Sua nova folha está pronta.');}
+    function fileDownload(name,blob){const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),900);}
+    function backup(){persist();const data=JSON.stringify({format:'margem-caderno',version:1,exportedAt:new Date().toISOString(),...state},null,2);fileDownload('MARGEM-backup-'+isoToday()+'.json',new Blob([data],{type:'application/json'}));toast('Backup salvo no dispositivo.');}
+    async function importBackup(file){if(!file)return;try{if(file.size>4_000_000)throw new Error('Arquivo grande demais.');const data=JSON.parse(await file.text());if(data.format!=='margem-caderno'||!Array.isArray(data.models)||!data.models.length)throw new Error('Não é um backup do MARGEM.');if(!confirm('Importar backup e substituir os modelos atuais deste navegador? Salve uma cópia antes, se precisar.'))return;const cleaned=data.models.slice(0,100).map(cleanModel);state={version:1,models:cleaned,activeId:cleaned.some(x=>x.id===data.activeId)?data.activeId:cleaned[0].id};selectedDoodle=null;fullRender();save();toast('Backup restaurado.');}catch(e){toast('Não foi possível importar: '+(e.message||'arquivo inválido'));}finally{$('backupInput').value='';}}
+    function plainText(){const m=model();return [m.title,'Semana: '+weekRange(m.date),'Meu objetivo: '+m.goal,...Object.keys(sectionNames).flatMap(key=>[sectionNames[key],...m.parts[key].map(h=>(h.time?h.time+' — ':'')+h.text)]),'Observações: '+m.notes,'Data: '+localDate(m.footerDate),'Assinatura: _____________________'].join('\n');}
+    async function copyText(){try{await navigator.clipboard.writeText(plainText());toast('Texto copiado.');}catch(e){const a=document.createElement('textarea');a.value=plainText();document.body.appendChild(a);a.select();try{document.execCommand('copy');toast('Texto copiado.');}catch(err){toast('Não foi possível copiar.');}a.remove();}}
+    function exportPdf(){selectedDoodle=null;renderPaper();persist();window.print();}
+    document.querySelector('.tabbar').addEventListener('click',e=>{const b=e.target.closest('[data-tab]');if(b)switchTab(b.dataset.tab);});
+    $('panel-sheet').addEventListener('input',e=>{const el=e.target;if(el.dataset.prop){const key=el.dataset.prop;model()[key]=el.value;renderPaper();save();return;}if(el.dataset.habitField){const card=el.closest('.habit-item');if(!card)return;const it=model().parts[card.dataset.period].find(h=>h.id===card.dataset.habitId);if(!it)return;it[el.dataset.habitField]=el.value;renderPaper();save();}});
+    $('habitsEditor').addEventListener('click',e=>{const add=e.target.closest('[data-add]');if(add){addHabit(add.dataset.add);return;}const btn=e.target.closest('[data-habit-act]');if(!btn)return;const card=btn.closest('.habit-item'),arr=model().parts[card.dataset.period],index=arr.findIndex(h=>h.id===card.dataset.habitId);if(index<0)return;switch(btn.dataset.habitAct){case 'delete':arr.splice(index,1);break;case 'up':if(index>0)[arr[index-1],arr[index]]=[arr[index],arr[index-1]];break;case 'down':if(index<arr.length-1)[arr[index],arr[index+1]]=[arr[index+1],arr[index]];break;}renderHabitEditor();renderPaper();save();});
+    $('doodlePalette').addEventListener('click',e=>{const btn=e.target.closest('[data-add-doodle]');if(btn)addDoodle(btn.dataset.addDoodle);});
+    $('selectedDoodleTools').addEventListener('input',e=>{const key=e.target.dataset.doodleProp;if(!key)return;const d=model().doodles.find(x=>x.id===selectedDoodle);if(!d)return;d[key]=Number(e.target.value);const output=e.target.closest('.range-wrap')?.querySelector('output');if(output)output.textContent=d[key]+(key==='angle'?'°':'px');renderPaper();save();});
+    $('selectedDoodleTools').addEventListener('click',e=>{const color=e.target.closest('[data-doodle-color]');if(color){const d=model().doodles.find(x=>x.id===selectedDoodle);if(!d)return;d.color=color.dataset.doodleColor;renderSelectedTools();renderPaper();save();}if(e.target.id==='removeDoodle'){model().doodles=model().doodles.filter(d=>d.id!==selectedDoodle);selectedDoodle=null;renderSelectedTools();renderPaper();save();}});
+    $('modelList').addEventListener('click',e=>{const action=e.target.closest('[data-model-action]');if(action){action.dataset.modelAction==='duplicate'?duplicateModel(action.dataset.id):deleteModel(action.dataset.id);return;}const b=e.target.closest('[data-model]');if(!b)return;state.activeId=b.dataset.model;selectedDoodle=null;fullRender();switchTab('sheet');persist();toast('Modelo aberto.');});
+    $('templateChoices').addEventListener('click',e=>{const btn=e.target.closest('[data-template]');if(btn)createTemplate(btn.dataset.template);});
+    for(const [id,key] of [['showTimes','showTimes'],['showSignature','showSignature'],['showEmptyAfternoon','showEmptyAfternoon']])$(id).addEventListener('change',e=>{model().settings[key]=e.target.checked;renderPaper();save();});
+    $('paperShade').addEventListener('change',e=>{model().settings.shade=e.target.value;renderPaper();save();});
+    // A posição dos rabiscos é armazenada como porcentagem da folha, para preservar o PDF.
+    let dragging=null;
+    $('paperDoodles').addEventListener('pointerdown',e=>{const el=e.target.closest('.paper-doodle');if(!el)return;const id=el.dataset.doodleId;selectedDoodle=id;switchTab('draw');renderSelectedTools();document.querySelectorAll('.paper-doodle').forEach(d=>d.classList.toggle('selected',d.dataset.doodleId===id));dragging={id,pointerId:e.pointerId};el.setPointerCapture(e.pointerId);e.preventDefault();});
+    $('paperDoodles').addEventListener('pointermove',e=>{if(!dragging||dragging.pointerId!==e.pointerId)return;const d=model().doodles.find(x=>x.id===dragging.id);if(!d)return;const rect=$('notebook').getBoundingClientRect();d.x=clamp((e.clientX-rect.left)/rect.width*100,3,97);d.y=clamp((e.clientY-rect.top)/rect.height*100,3,97);const node=Array.from(document.querySelectorAll('.paper-doodle')).find(el=>el.dataset.doodleId===dragging.id);if(node){node.style.left=d.x+'%';node.style.top=d.y+'%';}save();});
+    const stopDrag=()=>{dragging=null;};$('paperDoodles').addEventListener('pointerup',stopDrag);$('paperDoodles').addEventListener('pointercancel',stopDrag);
+    $('paperDoodles').addEventListener('keydown',e=>{const el=e.target.closest('.paper-doodle');if(!el)return;const d=model().doodles.find(x=>x.id===el.dataset.doodleId);if(!d)return;const step=e.shiftKey?5:1;if(e.key==='ArrowLeft')d.x-=step;else if(e.key==='ArrowRight')d.x+=step;else if(e.key==='ArrowUp')d.y-=step;else if(e.key==='ArrowDown')d.y+=step;else return;d.x=clamp(d.x,3,97);d.y=clamp(d.y,3,97);selectedDoodle=d.id;renderPaper();save();e.preventDefault();});
+    for(const id of ['backupTop','backupSettings'])$(id).addEventListener('click',backup);
+    $('importSettings').addEventListener('click',()=>$('backupInput').click());$('backupInput').addEventListener('change',e=>importBackup(e.target.files?.[0]));
+    for(const id of ['pdfTop','pdfPreview','pdfSettings'])$(id).addEventListener('click',exportPdf);
+    $('openDraw').addEventListener('click',()=>{switchTab('draw');if(window.innerWidth<760)$('panel-draw').scrollIntoView({behavior:'smooth',block:'start'});});
+    $('copyText').addEventListener('click',copyText);
+    window.addEventListener('resize',()=>requestAnimationFrame(checkOverflow));
+    window.addEventListener('pagehide',persist);
+    renderDoodlePalette();fullRender();switchTab('sheet');persist();
+  })();
+  </script>
+</body>
+</html>
