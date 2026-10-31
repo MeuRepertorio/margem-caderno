@@ -1,42 +1,43 @@
-# MARGEM — Seu caderno, do seu jeito
+# MARGEM 3.0 — Seu diário de papel
 
-**Um diário ritual leve para criar no digital e copiar no papel.**
+**Um caderno digital para criar folhas pessoais, organizar cuidados e depois reproduzir tudo à mão.**
 
-O MARGEM é um site estático e independente. Não precisa de instalação, conta, servidor, banco de dados, biblioteca externa nem serviço pago. A versão atual inclui:
+## Novidades da versão 3.0
 
-- Editor de rotina com **manhã, tarde e noite**, hábitos com horários opcionais e tabela de segunda a domingo;
-- Campos de objetivo, data, observações e assinatura;
-- Visual de **diário ritual leve**, com papel creme, clima mais íntimo e animações sutis;
-- Biblioteca de desenhos naturais e emocionais: lua, vela, galho, flor, folha, mariposa, pena, rabisco, estrela, chama, aranha, personagem e pentagrama;
-- Ferramentas para arrastar, redimensionar, girar, mudar cor e remover desenhos;
-- Modelos prontos, folha em branco, duplicação e exclusão;
-- Salvamento local no navegador, sem rastreamento de realização de hábitos;
-- Exportação de backup em JSON, importação de backup e cópia do texto;
-- Exportação PDF via **Imprimir → Salvar como PDF**, com layout de caderno em uma página A4;
-- Adaptação para celulares e computadores.
+- **Tela de boas-vindas** com identidade independente, fundo vinho, ilustrações e atalhos para Folha, Modelos, Desenhos e Ajustes.
+- **Editor de três áreas** no computador: menu vinho, folha de caderno ao centro e biblioteca/ferramentas à direita. No celular, o layout se adapta.
+- **20 ilustrações originais** em estilo de desenho à tinta/gravura, com motivos naturais, botânicos e simbólicos.
+- **Desenhos simples preservados**, com filtros para alternar entre os estilos.
+- **Importação de desenhos do aparelho** (PNG, JPEG ou WebP) para inserir diretamente na folha. Utilize imagens próprias ou para as quais haja autorização de uso.
+- Animações discretas, com suporte a preferência por movimento reduzido.
+- **Compatibilidade de salvamento com as versões anteriores:** continua utilizando a chave `margem.caderno.v1` para manter os modelos do navegador.
 
-## Abrir localmente
+## Funções
 
-Abra `index.html` em um navegador moderno, mesmo sem internet. A criação do PDF usa a ferramenta de impressão do próprio navegador.
+- Rotinas de manhã, tarde e noite com horários opcionais e tabela semanal para marcar à mão.
+- Campos de título, objetivo, semana, observações e assinatura.
+- Ilustrações que podem ser movidas, redimensionadas, giradas ou removidas.
+- Modelos novos, duplicação e exclusão de páginas.
+- Backup JSON e restauração no próprio site.
+- Geração de PDF via **Gerar PDF → Salvar como PDF** no navegador.
+- Site independente, estático, sem conta e sem bibliotecas externas.
 
-## Publicar no GitHub Pages
+## Publicação
 
-1. Entre em https://github.com/new e crie um repositório público chamado `margem-caderno` (ou outro nome).
-2. Abra o repositório e clique em **Add file → Upload files**.
-3. Envie os arquivos `index.html` e `README.md` (não envie apenas o ZIP).
-4. Faça o commit.
-5. Vá a **Settings → Pages → Build and deployment → Deploy from a branch**.
-6. Selecione `main`, pasta `/ (root)` e clique **Save**.
-7. Depois que o Pages terminar a publicação, o endereço será `https://SEU-USUARIO.github.io/margem-caderno/`, se esse for o nome escolhido.
+A página de entrada é `index.html` e pode ser hospedada diretamente pelo GitHub Pages. Para ativar, acesse **Settings → Pages → Deploy from a branch → main → /(root)**.
+
+Endereço público previsto (quando Pages estiver ativo):
+
+https://meurepertorio.github.io/margem-caderno/
 
 ## Privacidade e backup
 
-Os modelos são salvos com `localStorage` no dispositivo e navegador utilizados. Não há sincronização entre aparelhos. Limpar os dados do navegador pode apagar seus modelos; por isso, exporte um backup `.json` de tempos em tempos. A importação de backup **substitui** os modelos existentes, após confirmação.
+As folhas ficam no navegador e dispositivo atuais via `localStorage`, sem sincronização em nuvem. A limpeza dos dados do navegador pode apagar as folhas; faça backups JSON regularmente. Imagens próprias importadas são reduzidas para economizar espaço.
 
-## Observação sobre PDF
+## Arte e referências
 
-A exportação usa `window.print()`. Na janela de impressão, escolha **Salvar como PDF** e, se houver a opção, **Gráficos de fundo** para manter as pautas coloridas, o papel creme e os desenhos.
+As ilustrações incluídas são originais e apenas remetem ao estilo visual de desenhos manuais. Não são cópias retiradas do Pinterest. É possível inserir imagens externas autorizadas. Toda a biblioteca acompanha o arquivo HTML, sem depender de servidores externos.
 
-## Licença
+## Exportação
 
-Projeto pessoal. Você pode editar, publicar e adaptar o código livremente.
+A impressão usa uma folha **A4** com visual de papel de caderno escolar. Ative **Gráficos de fundo** na janela de impressão para preservar a aparência das pautas e do papel creme.
