@@ -1,43 +1,35 @@
-# MARGEM 3.0 — Seu diário de papel
+# MARGEM 4.0 — Caderno, desenhos e mapa mental
 
-**Um caderno digital para criar folhas pessoais, organizar cuidados e depois reproduzir tudo à mão.**
+**Um caderno digital feito para transformar planos, ideias e cuidados em folhas que podem ser copiadas à mão.**
 
-## Novidades da versão 3.0
+## Novidades desta versão
 
-- **Tela de boas-vindas** com identidade independente, fundo vinho, ilustrações e atalhos para Folha, Modelos, Desenhos e Ajustes.
-- **Editor de três áreas** no computador: menu vinho, folha de caderno ao centro e biblioteca/ferramentas à direita. No celular, o layout se adapta.
-- **20 ilustrações originais** em estilo de desenho à tinta/gravura, com motivos naturais, botânicos e simbólicos.
-- **Desenhos simples preservados**, com filtros para alternar entre os estilos.
-- **Importação de desenhos do aparelho** (PNG, JPEG ou WebP) para inserir diretamente na folha. Utilize imagens próprias ou para as quais haja autorização de uso.
-- Animações discretas, com suporte a preferência por movimento reduzido.
-- **Compatibilidade de salvamento com as versões anteriores:** continua utilizando a chave `margem.caderno.v1` para manter os modelos do navegador.
+- **Cotidiano noturno:** nova coleção de 28 desenhos individuais, extraídos e preparados a partir de composições artísticas originais aprovadas na conversa: fones de ouvido, café, livros, meias, cama, janela à noite, skyline, gato, fotografias, estrelas, e outros objetos e cenas. Ficam disponíveis em **Desenhos → Cotidiano noturno** para inserir, arrastar, girar e redimensionar.
+- **Orientação da folha:** escolha vertical/retrato ou horizontal/paisagem, tanto para rotina quanto para mapa mental; a exportação usa o formato A4 adequado.
+- **Mapa mental:** em **Folha → Modelo de organização → Mapa mental**, escreva o tema, edite ramos e sub-ramos, arraste os nós diretamente na folha e exporte o desenho completo em PDF. Crie um mapa novo a partir de **Modelos → Mapa mental**.
+- **Preserva seus modelos:** a chave de armazenamento segue como `margem.caderno.v1`, mantendo os documentos salvos neste mesmo dispositivo/navegador. Novos campos são opcionais e recebem valores padrão quando modelos antigos são carregados.
 
-## Funções
+## Arquivos do site
 
-- Rotinas de manhã, tarde e noite com horários opcionais e tabela semanal para marcar à mão.
-- Campos de título, objetivo, semana, observações e assinatura.
-- Ilustrações que podem ser movidas, redimensionadas, giradas ou removidas.
-- Modelos novos, duplicação e exclusão de páginas.
-- Backup JSON e restauração no próprio site.
-- Geração de PDF via **Gerar PDF → Salvar como PDF** no navegador.
-- Site independente, estático, sem conta e sem bibliotecas externas.
+- `index.html`: aplicativo e biblioteca artística anterior incorporada.
+- `urban-art.js`: nova coleção de 28 ilustrações processadas, pronta para funcionar offline, sem depender de imagens externas.
 
-## Publicação
+**Os dois arquivos precisam ficar lado a lado na raiz do repositório.** O MARGEM é hospedável diretamente no GitHub Pages e não exige build, banco de dados, conta ou biblioteca externa.
 
-A página de entrada é `index.html` e pode ser hospedada diretamente pelo GitHub Pages. Para ativar, acesse **Settings → Pages → Deploy from a branch → main → /(root)**.
+## Publicação no GitHub Pages
 
-Endereço público previsto (quando Pages estiver ativo):
+Em **Settings → Pages**, selecione **Deploy from a branch**, `main`, `/ (root)`.
 
-https://meurepertorio.github.io/margem-caderno/
+URL do projeto: https://meurepertorio.github.io/margem-caderno/
 
-## Privacidade e backup
+## Como criar o PDF
 
-As folhas ficam no navegador e dispositivo atuais via `localStorage`, sem sincronização em nuvem. A limpeza dos dados do navegador pode apagar as folhas; faça backups JSON regularmente. Imagens próprias importadas são reduzidas para economizar espaço.
+Em **Gerar PDF**, escolha **Salvar como PDF** na janela de impressão. A orientação acompanha a escolha na folha e o tamanho é A4. Habilite **Gráficos de fundo** para preservar a cor do papel e os desenhos.
 
-## Arte e referências
+## Privacidade e backups
 
-As ilustrações incluídas são originais e apenas remetem ao estilo visual de desenhos manuais. Não são cópias retiradas do Pinterest. É possível inserir imagens externas autorizadas. Toda a biblioteca acompanha o arquivo HTML, sem depender de servidores externos.
+Os dados continuam armazenados no próprio navegador com `localStorage`; não há sincronização automática. Faça backup JSON regularmente, especialmente antes de limpar o navegador.
 
-## Exportação
+## Direitos e referências
 
-A impressão usa uma folha **A4** com visual de papel de caderno escolar. Ative **Gráficos de fundo** na janela de impressão para preservar a aparência das pautas e do papel creme.
+As novas imagens são recortes processados de ilustrações originais geradas para esta coleção, não cópias de obras obtidas do Pinterest. É possível importar desenhos próprios ou que você tenha permissão de usar.
