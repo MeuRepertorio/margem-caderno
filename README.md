@@ -1,13 +1,13 @@
 # MARGEM — Seu caderno, do seu jeito
 
-**Uma página de caderno digital feita para ser copiada no papel.**
+**Um diário ritual leve para criar no digital e copiar no papel.**
 
-O MARGEM é um site estático e independente. Não precisa de instalação, conta, servidor, banco de dados, biblioteca externa nem serviço pago. A versão inicial inclui:
+O MARGEM é um site estático e independente. Não precisa de instalação, conta, servidor, banco de dados, biblioteca externa nem serviço pago. A versão atual inclui:
 
 - Editor de rotina com **manhã, tarde e noite**, hábitos com horários opcionais e tabela de segunda a domingo;
 - Campos de objetivo, data, observações e assinatura;
-- Folha pautada com margem vermelha e furos de caderno escolar;
-- Dez ilustrações vetoriais: aranha, flor, estrela, chama, lua, galho, rabisco, personagem, vela e pentagrama;
+- Visual de **diário ritual leve**, com papel creme, clima mais íntimo e animações sutis;
+- Biblioteca de desenhos naturais e emocionais: lua, vela, galho, flor, folha, mariposa, pena, rabisco, estrela, chama, aranha e pentagrama;
 - Ferramentas para arrastar, redimensionar, girar, mudar cor e remover desenhos;
 - Modelos prontos, folha em branco, duplicação e exclusão;
 - Salvamento local no navegador, sem rastreamento de realização de hábitos;
@@ -23,8 +23,8 @@ Abra `index.html` em um navegador moderno, mesmo sem internet. A criação do PD
 
 1. Entre em https://github.com/new e crie um repositório público chamado `margem-caderno` (ou outro nome).
 2. Abra o repositório e clique em **Add file → Upload files**.
-3. Envie os arquivos `index.html` e `README.md` que estão dentro deste ZIP (não envie apenas o ZIP).
-4. Faça o commit (Confirmar alterações).
+3. Envie os arquivos `index.html` e `README.md` (não envie apenas o ZIP).
+4. Faça o commit.
 5. Vá a **Settings → Pages → Build and deployment → Deploy from a branch**.
 6. Selecione `main`, pasta `/ (root)` e clique **Save**.
 7. Depois que o Pages terminar a publicação, o endereço será `https://SEU-USUARIO.github.io/margem-caderno/`, se esse for o nome escolhido.
@@ -35,7 +35,7 @@ Os modelos são salvos com `localStorage` no dispositivo e navegador utilizados.
 
 ## Observação sobre PDF
 
-A exportação usa `window.print()`. Na janela de impressão, escolha **Salvar como PDF** e, se houver a opção, **Gráficos de fundo** para manter as pautas coloridas. O tamanho externo é A4 por compatibilidade com leitores e impressoras; o design da página é de caderno escolar.
+A exportação usa `window.print()`. Na janela de impressão, escolha **Salvar como PDF** e, se houver a opção, **Gráficos de fundo** para manter as pautas coloridas, o papel creme e os desenhos.
 
 ## Licença
 
