@@ -7,7 +7,7 @@ O MARGEM é um site estático e independente. Não precisa de instalação, cont
 - Editor de rotina com **manhã, tarde e noite**, hábitos com horários opcionais e tabela de segunda a domingo;
 - Campos de objetivo, data, observações e assinatura;
 - Visual de **diário ritual leve**, com papel creme, clima mais íntimo e animações sutis;
-- Biblioteca de desenhos naturais e emocionais: lua, vela, galho, flor, folha, mariposa, pena, rabisco, estrela, chama, aranha e pentagrama;
+- Biblioteca de desenhos naturais e emocionais: lua, vela, galho, flor, folha, mariposa, pena, rabisco, estrela, chama, aranha, personagem e pentagrama;
 - Ferramentas para arrastar, redimensionar, girar, mudar cor e remover desenhos;
 - Modelos prontos, folha em branco, duplicação e exclusão;
 - Salvamento local no navegador, sem rastreamento de realização de hábitos;
