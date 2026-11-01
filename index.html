@@ -519,6 +519,84 @@ body[data-mode="mindmap"] .mind-stage{flex:1;min-height:0;height:100%;margin-bot
  body[data-orientation="landscape"] .paper-title{font-size:25px!important;margin:8px 0!important}
 }
 
+
+/* MARGEM 5 — folhas pessoais para copiar e deixar na parede */
+.routine-hub{margin:30px 0 32px;padding:24px clamp(14px,3vw,28px);border:1px solid #cfae98aa;border-radius:16px;background:linear-gradient(140deg,#f7e8d3 0%,#ecd7c0 100%);box-shadow:0 18px 35px #190a0a1a}
+.routine-hub-heading{max-width:720px;margin:0 auto 19px;text-align:center;color:#432b32}
+.routine-hub-kicker{font-size:10px;text-transform:uppercase;letter-spacing:.19em;font-weight:800;color:#8f5f60}
+.routine-hub-heading h2{margin:8px 0;font:clamp(25px,3.3vw,37px) Georgia,serif}
+.routine-hub-heading p{margin:0;color:#846a61;font-size:12px;line-height:1.6}
+.routine-hub-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;max-width:850px;margin:auto}
+.routine-hub-card{padding:19px 21px 17px;text-align:left;min-width:0;display:flex;flex-direction:column;gap:7px;color:#463032;background:repeating-linear-gradient(to bottom,#fffaf0 0,#fffaf0 28px,#e2d8c8 29px,#fffaf0 30px);border:1px solid #d9bba9;border-radius:12px;box-shadow:5px 8px 0 #88665c1c;transition:transform .2s,box-shadow .2s}
+.routine-hub-card:hover{transform:translateY(-3px) rotate(-.4deg);box-shadow:7px 13px 0 #88665c20}
+.routine-card-art{font:23px Georgia,serif;color:#8f6a75;letter-spacing:.38em}
+.routine-card-art span{color:#4f313b}
+.routine-card-type{font:700 9px 'Trebuchet MS',sans-serif;letter-spacing:.18em;color:#9d7774;margin-top:3px}
+.routine-hub-card strong{font:25px/1.2 Georgia,serif}
+.routine-hub-card small{font:12px/1.6 'Trebuchet MS',sans-serif;min-height:42px;color:#76615a}
+.routine-card-action{font-size:11px;font-weight:800;color:#673e4b;margin-top:7px}
+/* Print-oriented paper components, these are the complete personal routine and weekly model. */
+.personal-topline{display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px dashed #c9ae9e;padding-bottom:9px;color:#8d6b62;font-size:9px;letter-spacing:.13em;text-transform:uppercase}
+.personal-intro{margin:13px 0 13px;text-align:center}.personal-intro h2{font:italic 31px/1.15 Georgia,serif;margin:0;color:#432e37}.personal-intro p{font:12px/1.5 Georgia,serif;color:#89706a;margin:6px 0 0}
+.personal-meta{display:flex;justify-content:space-between;gap:14px;margin:0 0 13px;color:#735a5b;font-size:11px}
+.personal-meta strong{color:#553d41}
+.personal-columns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;align-items:start}
+.personal-period{border:1px solid #d5b8a7;background:#fff9f0d9;border-radius:11px;min-width:0;box-shadow:3px 4px 0 #87685d0b;overflow:hidden}
+.personal-period-head{display:flex;justify-content:space-between;align-items:center;padding:11px 10px 9px;background:linear-gradient(130deg,#e7cfbe,#f2e0cd);color:#5f4149;border-bottom:1px solid #d3b7a6}
+.personal-period-head h3{font:italic 20px Georgia,serif;margin:0}.personal-period-head span{font:10px Georgia,serif;color:#8c6562}
+.personal-dayhint{color:#96796d;font-size:8px;text-align:right;padding:6px 10px 3px}
+.personal-habit{padding:6px 8px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:7px;align-items:center;border-bottom:1px solid #d8ccbe88;min-height:34px}
+.personal-habit:last-child{border-bottom:0}.personal-habit-label{line-height:1.28;font:10.6px/1.28 'Trebuchet MS',Arial,sans-serif;color:#4b3b37;overflow-wrap:anywhere}
+.personal-habit-label time{font-size:9px;color:#9c796d;margin-right:4px;font-weight:800}
+.personal-checks{display:flex;gap:2px}.personal-checks b{display:inline-block;width:9px;height:9px;border:1px solid #ae9688;border-radius:2px;background:#fffdf7}
+.personal-foot{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+.personal-note{background:#faf0e2b8;border-radius:10px;border:1px solid #d5bba9;padding:10px 13px;font:11px/1.5 Georgia,serif;color:#674d4b;min-height:68px}
+.personal-note strong{display:block;margin-bottom:7px;color:#523941}
+.personal-note-line{border-bottom:1px solid #bca998;height:19px}
+.personal-tiny{color:#96796d;font:italic 10px Georgia,serif;text-align:center;margin-top:12px}
+body[data-mode='wall'] .notebook{overflow:hidden}
+body[data-mode='wall'] #editorScreen .notebook-content{padding:23px 29px 29px 82px!important}
+body[data-mode='wall'] .paper-doodle{opacity:.42}
+body[data-mode='weekly'] #editorScreen .notebook-content{padding:28px 48px 37px 104px!important}
+.weekly-hero{border-bottom:1px dashed #d1bbac;padding:4px 0 14px;margin:12px 0 19px;text-align:center}
+.weekly-hero h2{font:italic 38px Georgia,serif;color:#4b323a;margin:0 0 8px}.weekly-hero p{color:#826e68;font:12px/1.5 Georgia,serif;margin:0}
+.weekly-tasks{width:100%;border-collapse:collapse;background:#fffcf6d1;table-layout:fixed;border:1px solid #d9bfad}
+.weekly-tasks th{background:#ead7c8;color:#6d5054;letter-spacing:.04em;font-size:9px;padding:10px 6px;border:1px solid #d8bdad}
+.weekly-tasks th:first-child{text-align:left;padding-left:12px;width:42%}
+.weekly-tasks td{padding:11px 7px;border:1px solid #e4cfc2;color:#493a37;font-size:11px;overflow-wrap:anywhere;line-height:1.34}
+.weekly-tasks td:first-child{padding-left:12px}.weekly-tasks td.weekly-check{text-align:center;padding:6px}
+.weekly-tasks .empty-square{width:13px;height:13px;border:1px solid #a5877e;background:#fff;display:inline-block;border-radius:2px}
+.weekly-extra{margin-top:22px;display:grid;grid-template-columns:1fr 1fr;gap:17px}
+.weekly-box{border:1px solid #d8c1b0;padding:12px 15px;min-height:97px;background:#fff8ee99;border-radius:10px;color:#755b59;font:11px/1.6 Georgia,serif}
+.weekly-box strong{display:block;font:700 11px 'Trebuchet MS',sans-serif;letter-spacing:.02em;margin-bottom:8px;color:#5f454b}
+.weekly-box .write-line{border-bottom:1px solid #cab9ad;height:20px}
+body[data-mode='weekly'] #habitsEditor .segment-label:not(:first-child),body[data-mode='weekly'] #habitsEditor .segment-label:not(:first-child)+.habit-list,body[data-mode='weekly'] #habitsEditor .segment-label:not(:first-child)+.habit-list+.add-habit{display:none}
+@media(max-width:760px){.routine-hub-cards{grid-template-columns:1fr}.routine-hub{margin:24px 0}.personal-columns{gap:4px}.personal-period-head{padding:5px 4px}.personal-period-head h3{font-size:11px}.personal-period-head span{display:none}.personal-habit{padding:3px 3px;gap:2px;min-height:24px}.personal-habit-label{font-size:6px}.personal-habit-label time{font-size:6px}.personal-checks{gap:1px}.personal-checks b{width:4px;height:5px;border-width:.5px}.personal-intro h2{font-size:17px}.personal-intro p{font-size:8px}.personal-topline,.personal-meta{font-size:7px}.personal-foot{gap:5px;margin-top:6px}.personal-note{padding:5px;font-size:7px;min-height:42px}.personal-note strong{margin:0}.personal-tiny{font-size:7px}body[data-mode='wall'] #editorScreen .notebook-content{padding:12px 8px 12px 46px!important}body[data-mode='weekly'] #editorScreen .notebook-content{padding:14px 8px 15px 45px!important}.weekly-hero h2{font-size:21px}.weekly-tasks th,.weekly-tasks td{padding:4px 2px;font-size:7px}.weekly-tasks th:first-child,.weekly-tasks td:first-child{padding-left:3px}.weekly-tasks .empty-square{width:6px;height:6px}.weekly-extra{margin-top:8px;gap:6px}.weekly-box{padding:7px;font-size:7px;min-height:45px}.weekly-box .write-line{height:12px}}
+@media print{
+ body[data-mode='wall'] #editorScreen .notebook-content{padding:23px 40px 23px 92px!important}
+ body[data-mode='wall'] .personal-topline{font-size:9px!important}
+ body[data-mode='wall'] .personal-intro h2{font-size:30px!important}
+ body[data-mode='wall'] .personal-intro p{font-size:12px!important}
+ body[data-mode='wall'] .personal-meta{font-size:10px!important}
+ body[data-mode='wall'] .personal-period-head{padding:9px 9px!important}
+ body[data-mode='wall'] .personal-period-head h3{font-size:18px!important}
+ body[data-mode='wall'] .personal-period-head span{font-size:10px!important}
+ body[data-mode='wall'] .personal-habit{padding:5px 7px!important;min-height:30px!important}
+ body[data-mode='wall'] .personal-habit-label{font-size:10.4px!important}
+ body[data-mode='wall'] .personal-habit-label time{font-size:9px!important}
+ body[data-mode='wall'] .personal-checks b{width:8px!important;height:8px!important}
+ body[data-mode='wall'] .personal-tiny{font-size:10px!important}
+ body[data-mode='weekly'] #editorScreen .notebook-content{padding:29px 45px 34px 110px!important}
+ body[data-mode='weekly'] .weekly-hero h2{font-size:39px!important}
+ body[data-mode='weekly'] .weekly-tasks th{font-size:10px!important;padding:10px 7px!important}
+ body[data-mode='weekly'] .weekly-tasks td{font-size:12px!important;padding:11px 7px!important}
+ body[data-mode='weekly'] .weekly-tasks td:first-child{padding-left:13px!important}
+ body[data-mode='weekly'] .weekly-tasks .empty-square{width:13px!important;height:13px!important}
+ body[data-mode='weekly'] .weekly-extra{margin-top:25px!important}
+ body[data-mode='weekly'] .weekly-box{font-size:11px!important;min-height:95px!important}
+}
+@media(prefers-reduced-motion:reduce){.routine-hub-card{transition:none}}
+
   </style>
   <style id="margemDynamicPrint"></style>
 </head>
@@ -558,7 +636,14 @@ body[data-mode="mindmap"] .mind-stage{flex:1;min-height:0;height:100%;margin-bot
       <button type="button" class="welcome-link" data-route="draw"><span class="welcome-link-icon">✧</span><strong>Biblioteca de desenhos</strong><small>Ilustrações à tinta e suas imagens</small><span class="welcome-link-arrow">↗</span></button>
       <button type="button" class="welcome-link" data-route="settings"><span class="welcome-link-icon">◈</span><strong>Meu espaço</strong><small>Papel, backup e ajustes</small><span class="welcome-link-arrow">↗</span></button>
     </div>
-    <footer class="welcome-footer"><span>MARGEM / UM DIÁRIO QUE SAI DA TELA E VAI PARA O PAPEL</span><span>✦ O ritmo é seu.</span></footer>
+    <section class="routine-hub" aria-label="Minha rotina pessoal">
+      <div class="routine-hub-heading"><span class="routine-hub-kicker">✦ Espaço pessoal</span><h2>Minha rotina, do meu jeito.</h2><p>Duas folhas já organizadas para você adaptar, salvar em PDF e copiar no papel. Não precisa preencher tudo perfeitamente.</p></div>
+      <div class="routine-hub-cards">
+        <button type="button" class="routine-hub-card" data-open-routine="daily"><span class="routine-card-art" aria-hidden="true">☼ <span>✎</span> ☾</span><span class="routine-card-type">FOLHA 01 · DIA A DIA</span><strong>Meu ritmo diário</strong><small>Manhã, escola, curso, noite, higiene, água, descanso e pequenas metas.</small><span class="routine-card-action">Abrir minha rotina ↗</span></button>
+        <button type="button" class="routine-hub-card" data-open-routine="weekly"><span class="routine-card-art" aria-hidden="true">✿ <span>✓</span> ✧</span><span class="routine-card-type">FOLHA 02 · TODA SEMANA</span><strong>Meus cuidados da semana</strong><small>Quarto, roupas, autocuidado, material, notas e tarefas escolares.</small><span class="routine-card-action">Abrir cuidados semanais ↗</span></button>
+      </div>
+    </section>
+    <footer class="welcome-footer"><span>MARGEM / ROTINAS REAIS, FEITAS PARA O PAPEL</span><span>✦ O ritmo é seu.</span></footer>
   </div>
 </section>
 <div id="editorScreen" hidden>
@@ -582,6 +667,8 @@ body[data-mode="mindmap"] .mind-stage{flex:1;min-height:0;height:100%;margin-bot
         <button type="button" data-route="home"><span>⌂</span> Início</button>
         <button type="button" data-route="sheet"><span>✎</span> Editor</button>
         <button type="button" data-route="models"><span>▤</span> Modelos</button>
+        <button type="button" data-open-routine="daily"><span>♡</span> Minha rotina</button>
+        <button type="button" data-open-routine="weekly"><span>✿</span> Cuidados semanais</button>
         <button type="button" data-route="draw"><span>✧</span> Desenhos</button>
         <button type="button" data-route="settings"><span>◈</span> Meu espaço</button>
       </nav>
@@ -600,7 +687,7 @@ body[data-mode="mindmap"] .mind-stage{flex:1;min-height:0;height:100%;margin-bot
         <div class="panel-scroll">
           <section id="panel-sheet" class="panel active" role="tabpanel" aria-label="Editar folha">
             <h3>Conteúdo da folha</h3><p class="lead">Escolha como organizar suas ideias. A prévia muda na mesma hora.</p>
-            <div class="page-layout-settings"><div class="field"><label for="sheetType">Modelo de organização</label><select id="sheetType"><option value="routine">Rotina por períodos</option><option value="mindmap">Mapa mental</option></select></div><div class="field"><label for="paperDirection">Orientação da folha</label><select id="paperDirection"><option value="portrait">Vertical (retrato)</option><option value="landscape">Horizontal (paisagem)</option></select></div></div>
+            <div class="page-layout-settings"><div class="field"><label for="sheetType">Modelo de organização</label><select id="sheetType"><option value="routine">Rotina por períodos</option><option value="wall">Minha rotina (painel)</option><option value="weekly">Cuidados semanais</option><option value="mindmap">Mapa mental</option></select></div><div class="field"><label for="paperDirection">Orientação da folha</label><select id="paperDirection"><option value="portrait">Vertical (retrato)</option><option value="landscape">Horizontal (paisagem)</option></select></div></div>
             <div class="field"><label for="modelTitle">Título da folha</label><input id="modelTitle" data-prop="title" maxlength="84" autocomplete="off" placeholder="Minha rotina de cuidados"></div>
             <div class="field"><label for="modelGoal">Objetivo pessoal</label><textarea id="modelGoal" data-prop="goal" maxlength="450" placeholder="O que esta folha deve me ajudar a lembrar?"></textarea></div>
             <div class="inline-fields">
@@ -720,7 +807,49 @@ body[data-mode="mindmap"] .mind-stage{flex:1;min-height:0;height:100%;margin-bot
       if(kind==='simple'){title='O essencial para mim';goal='Não preciso fazer tudo. Vou começar pelo que importa.';parts.morning=[habit('Arrumar a cama')];parts.night=[habit('Tomar banho'),habit('Escovar os dentes')];}
       if(kind==='blank'){title='Minha folha';goal='';}
       if(kind==='map'){title='Meu mapa de ideias';goal='O que quero cultivar e construir';}
-      return {id:uid(),title,goal,date:isoToday(),footerDate:'',notes:'',parts,doodles:starterDoodles(kind),settings:{showTimes:true,showSignature:true,showEmptyAfternoon:true,shade:'cream',orientation:'portrait',mode:kind==='map'?'mindmap':'routine'},mapNodes:makeMapNodes(),created:Date.now(),updated:Date.now()};
+      if(kind==='personal-daily'){
+        title='Meu ritmo diário';goal='Cuidar de mim com constância, sem precisar de um dia perfeito.';
+        parts.morning=[
+          habit('Anotar hora em que acordei'),habit('Arrumar a cama'),habit('Abrir a janela'),
+          habit('Água: até 500 mL, aos poucos'),habit('Tomar café da manhã'),
+          habit('Banho, se couber no tempo'),habit('Escovar os dentes'),
+          habit('Creme corporal e desodorante'),habit('Conferir mochila'),habit('Sair para a escola','06:50'),habit('Comparecer à escola')
+        ];
+        parts.afternoon=[
+          habit('Chegar da escola','12:30'),habit('Almoçar'),habit('Água: mais 500 mL, aos poucos'),
+          habit('Trocar de roupa'),habit('Escovar os dentes'),habit('Conferir material do curso'),
+          habit('Banho extra, só se possível'),habit('Sair para o curso','13:10'),habit('Comparecer ao curso')
+        ];
+        parts.night=[
+          habit('Chegar até 19h30','19:30'),habit('Água: mais 500 mL, aos poucos'),
+          habit('Jantar'),habit('Tomar banho'),habit('Passar creme corporal'),
+          habit('Desodorante se necessário'),habit('Usar fio dental'),
+          habit('Escovar os dentes'),habit('Enxágue bucal (se usar)'),
+          habit('Ler um pouco'),habit('Revisar a escola: 15 min'),
+          habit('Conferir tarefas e pendências'),habit('Separar roupas e materiais'),
+          habit('Tempo livre, sem cobrança'),habit('Registrar hora de dormir')
+        ];
+      }
+      if(kind==='personal-weekly'){
+        title='Meus cuidados da semana';goal='Organizar o que importa sem transformar autocuidado em cobrança.';
+        parts.morning=[
+          habit('Organizar o quarto com calma'),habit('Trocar roupas de cama'),
+          habit('Separar roupas e verificar lavanderia'),habit('Trocar toalhas e cuidar do banheiro'),
+          habit('Cuidar das unhas, se necessário'),habit('Aparar pelos, se desejar'),
+          habit('Conferir creme, fio dental e outros itens'),habit('Limpar e organizar mochila e materiais'),
+          habit('Verificar notas, faltas e recuperações'),habit('Planejar entregas e provas da semana'),
+          habit('Rever horários e compromissos'),habit('Reservar tempo para algo que gosto')
+        ];
+        parts.afternoon=[];parts.night=[];
+      }
+      const personalArt=kind==='personal-daily' ? [
+        {id:uid(),type:'urb_fone',x:96,y:18,size:62,angle:-6,color:'#6c5748'},
+        {id:uid(),type:'urb_estrela',x:13,y:88,size:42,angle:0,color:'#6c5748'}
+      ] : kind==='personal-weekly' ? [
+        {id:uid(),type:'urb_livros',x:90,y:10,size:64,angle:7,color:'#6c5748'},
+        {id:uid(),type:'urb_cafe',x:90,y:92,size:55,angle:0,color:'#6c5748'}
+      ] : starterDoodles(kind);
+      return {id:uid(),title,goal,date:isoToday(),footerDate:'',notes:'',parts,doodles:personalArt,settings:{showTimes:true,showSignature:true,showEmptyAfternoon:true,shade:'cream',orientation:kind==='personal-daily'?'landscape':'portrait',mode:kind==='map'?'mindmap':kind==='personal-daily'?'wall':kind==='personal-weekly'?'weekly':'routine'},presetType:kind.startsWith('personal-')?kind:'',mapNodes:makeMapNodes(),created:Date.now(),updated:Date.now()};
     }
     let state={version:1,models:[makeModel('care')],activeId:null};state.activeId=state.models[0].id;
     function cleanModel(obj){
@@ -731,14 +860,26 @@ body[data-mode="mindmap"] .mind-stage{flex:1;min-height:0;height:100%;margin-bot
       model.date=/^\d{4}-\d{2}-\d{2}$/.test(obj.date)?obj.date:isoToday();
       model.footerDate=/^\d{4}-\d{2}-\d{2}$/.test(obj.footerDate)?obj.footerDate:'';
       model.notes=String(obj.notes??'').slice(0,700);
+      model.presetType=['personal-daily','personal-weekly'].includes(obj.presetType)?obj.presetType:'';
       for(const k of Object.keys(model.parts)){model.parts[k]=Array.isArray(obj.parts?.[k])?obj.parts[k].slice(0,40).map(h=>({id:typeof h.id==='string'?h.id.slice(0,80):uid(),text:String(h.text??'').slice(0,150),time:/^([01]\d|2[0-3]):[0-5]\d$/.test(h.time)?h.time:''})):[];}
       model.doodles=Array.isArray(obj.doodles)?obj.doodles.slice(0,40).filter(d=>artwork[d.type] && (d.type!=='custom'||(typeof d.imageData==='string'&&/^data:image\/(webp|png|jpeg);base64,/.test(d.imageData)&&d.imageData.length<200000))).map(d=>({id:typeof d.id==='string'?d.id.slice(0,80):uid(),type:d.type,x:clamp(Number(d.x)||50,3,97),y:clamp(Number(d.y)||50,3,97),size:clamp(Number(d.size)||68,20,150),angle:clamp(Number(d.angle)||0,-180,180),color:['#6c5748','#67735d','#8c6f73','#556674','#9a765c','#59718a','#536160','#876d82','#93685f'].includes(d.color)?d.color:'#6c5748',...(d.type==='custom'?{imageData:d.imageData,name:String(d.name||'Meu desenho').slice(0,50)}:{})})):[];
-      model.settings={showTimes:obj.settings?.showTimes!==false,showSignature:obj.settings?.showSignature!==false,showEmptyAfternoon:obj.settings?.showEmptyAfternoon!==false,shade:obj.settings?.shade==='natural'?'natural':'cream',orientation:obj.settings?.orientation==='landscape'?'landscape':'portrait',mode:obj.settings?.mode==='mindmap'?'mindmap':'routine'};
+      model.settings={showTimes:obj.settings?.showTimes!==false,showSignature:obj.settings?.showSignature!==false,showEmptyAfternoon:obj.settings?.showEmptyAfternoon!==false,shade:obj.settings?.shade==='natural'?'natural':'cream',orientation:obj.settings?.orientation==='landscape'?'landscape':'portrait',mode:['routine','wall','weekly','mindmap'].includes(obj.settings?.mode)?obj.settings.mode:'routine'};
       model.mapNodes=Array.isArray(obj.mapNodes)&&obj.mapNodes.length ? obj.mapNodes.slice(0,30).map(n=>({id:String(n.id||uid()).slice(0,80),text:String(n.text||'').slice(0,90),x:clamp(Number(n.x)||50,9,91),y:clamp(Number(n.y)||50,10,90),parent:n.parent?String(n.parent).slice(0,80):null})) : makeMapNodes();
       model.created=Number(obj.created)||Date.now();model.updated=Number(obj.updated)||Date.now();return model;
     }
     const clamp=(v,min,max)=>Math.min(max,Math.max(min,v));
     try{const saved=JSON.parse(localStorage.getItem(STORE)||'null');if(saved&&Array.isArray(saved.models)&&saved.models.length){state={version:1,models:saved.models.slice(0,100).map(cleanModel),activeId:saved.activeId};if(!state.models.some(m=>m.id===state.activeId))state.activeId=state.models[0].id;}}catch(e){console.warn('Não foi possível abrir o armazenamento local.',e);}
+    // Adds new personal templates non-destructively. A separate flag prevents reinstall if deleted.
+    try{
+      const flag='margem.personal-sheets.v1';
+      if(!localStorage.getItem(flag)){
+        const existing=state.models;
+        const presets=[makeModel('personal-daily'),makeModel('personal-weekly')];
+        for(const item of presets)if(existing.length<100)existing.push(item);
+        localStorage.setItem(STORE,JSON.stringify(state));
+        localStorage.setItem(flag,'1');
+      }
+    }catch(e){console.warn('Modelos pessoais não puderam ser salvos automaticamente.',e);}
     let selectedDoodle=null,tab='sheet',saveTimer=null,artFilter='ink';
     const model=()=>state.models.find(m=>m.id===state.activeId)||state.models[0];
     function persist(){try{localStorage.setItem(STORE,JSON.stringify(state));$('saveState').textContent='Salvo neste dispositivo';}catch(e){$('saveState').textContent='Sem espaço para salvar';toast('Não foi possível salvar. Exporte um backup.');}}
@@ -772,6 +913,24 @@ body[data-mode="mindmap"] .mind-stage{flex:1;min-height:0;height:100%;margin-bot
     function renderPaperDoodles(){
       const m=model();$('paperDoodles').innerHTML=m.doodles.map(d=>`<div class="paper-doodle${selectedDoodle===d.id?' selected':''}" data-doodle-id="${esc(d.id)}" role="button" tabindex="0" aria-label="Mover desenho: ${artwork[d.type].label}" style="left:${(d.type==='ink_moon'&&d.x<=12&&d.y<=22)?5:d.x}%;top:${(d.type==='ink_moon'&&d.x<=12&&d.y<=22)?33:d.y}%;width:${d.size}px;height:${d.size}px;color:${d.color}"><span style="width:100%;height:100%;display:block;transform:rotate(${d.angle}deg)">${drawingSVG(d.type,d.imageData)}</span></div>`).join('');
     }
+
+    function renderPersonalWall(){
+      const m=model();
+      const labels={morning:['Manhã','Antes da escola · até 06h50'],afternoon:['Tarde','Escola → curso · 12h30–13h15'],night:['Noite','Depois do curso · até dormir']};
+      const checks=Array.from({length:7},()=>'<b aria-hidden="true"></b>').join('');
+      const columns=Object.entries(labels).map(([key,[title,sub]])=>{
+        const rows=m.parts[key].map(h=>`<div class="personal-habit"><div class="personal-habit-label">${h.time?'<time>'+esc(h.time)+'</time>':''}${esc(h.text)||'________'}</div><div class="personal-checks" aria-label="Caixinhas de segunda a domingo">${checks}</div></div>`).join('');
+        return `<section class="personal-period"><div class="personal-period-head"><h3>${title}</h3><span>${sub}</span></div><div class="personal-dayhint">S  T  Q  Q  S  S  D</div>${rows||'<div class="personal-habit">Adicione seus cuidados pelo editor.</div>'}</section>`;
+      }).join('');
+      $('paperContent').innerHTML=`<div class="personal-topline"><span>MARGEM · MEU CADERNO</span><span>01 / MINHA ROTINA</span></div><div class="personal-intro"><h2>${esc(m.title)}</h2><p>${esc(m.goal)}</p></div><div class="personal-meta"><span>Semana: <strong>${esc(weekRange(m.date))}</strong></span><span>Hora que acordei: ______</span></div><div class="personal-columns">${columns}</div><div class="personal-foot"><div class="personal-note"><strong>Uma coisa que fiz por mim hoje</strong><div class="personal-note-line"></div><div class="personal-note-line"></div></div><div class="personal-note"><strong>Observações e ajustes</strong><div>Hora em que fui dormir: ______</div><div>${esc(m.notes||'Algo que eu queira lembrar: __________________')}</div><div class="personal-note-line"></div></div></div><p class="personal-tiny">Não é uma prova de produtividade. Adapte os horários e marque somente o que fizer sentido. Enxágue bucal, se usado, em horário separado da escovação.</p>`;
+      renderPaperDoodles();
+    }
+    function renderPersonalWeekly(){
+      const m=model();const days=['S','T','Q','Q','S','S','D'];
+      const rows=m.parts.morning.map(h=>`<tr><td>${esc(h.text)||'___________'}</td>${days.map(()=>'<td class="weekly-check"><span class="empty-square" aria-hidden="true"></span></td>').join('')}</tr>`).join('');
+      $('paperContent').innerHTML=`<div class="personal-topline"><span>MARGEM · MEU CADERNO</span><span>02 / CUIDADOS DA SEMANA</span></div><div class="weekly-hero"><h2>${esc(m.title)}</h2><p>${esc(m.goal)}</p></div><div class="personal-meta"><span>Semana: <strong>${esc(weekRange(m.date))}</strong></span><span>Cuidar também é descansar.</span></div><table class="weekly-tasks"><thead><tr><th>O que quero cuidar</th>${days.map(d=>`<th>${d}</th>`).join('')}</tr></thead><tbody>${rows}</tbody></table><div class="weekly-extra"><div class="weekly-box"><strong>Prioridades escolares da semana</strong><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div></div><div class="weekly-box"><strong>O que merece minha atenção</strong><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div></div></div><p class="personal-tiny">Tarefas semanais não precisam ser feitas todos os dias. Escolha o dia que fizer sentido.</p>`;
+      renderPaperDoodles();
+    }
     function renderPaper(){
       const m=model(),parts=m.parts,showTimes=m.settings.showTimes;
       document.body.dataset.orientation=m.settings.orientation||'portrait';
@@ -781,6 +940,13 @@ body[data-mode="mindmap"] .mind-stage{flex:1;min-height:0;height:100%;margin-bot
       $('habitsEditor').hidden=m.settings.mode==='mindmap';
       if(m.settings.mode==='mindmap'){
         renderMindMap();
+        requestAnimationFrame(checkOverflow);
+        return;
+      }
+      if(m.settings.mode==='wall'||m.settings.mode==='weekly'){
+        $('notebook').style.backgroundColor=m.settings.shade==='natural'?'#fffefa':'#fbf2e3';
+        $('notebook').style.setProperty('--print-paper',m.settings.shade==='natural'?'#fffefa':'#fbf2e3');
+        if(m.settings.mode==='wall')renderPersonalWall();else renderPersonalWeekly();
         requestAnimationFrame(checkOverflow);
         return;
       }
@@ -806,9 +972,9 @@ body[data-mode="mindmap"] .mind-stage{flex:1;min-height:0;height:100%;margin-bot
       renderPaperDoodles();
       requestAnimationFrame(checkOverflow);
     }
-    function checkOverflow(){if(model().settings.mode==='mindmap'){$('pageWarning').classList.remove('show');return;}if(model().settings.orientation==='landscape'){const m=model(),count=Object.values(m.parts).reduce((n,a)=>n+a.length,0);$('pageWarning').classList.toggle('show',count>10||m.notes.length>300||m.goal.length>200);return;}const paper=$('notebook');const contents=$('paperContent');if(!paper||!contents)return;const last=contents.lastElementChild;const bottom=last?last.getBoundingClientRect().bottom-paper.getBoundingClientRect().top:0;const allowed=paper.clientHeight-18;$('pageWarning').classList.toggle('show',bottom>allowed);}
+    function checkOverflow(){if(['mindmap','wall','weekly'].includes(model().settings.mode)){$('pageWarning').classList.remove('show');return;}if(model().settings.mode==='mindmap'){$('pageWarning').classList.remove('show');return;}if(model().settings.orientation==='landscape'){const m=model(),count=Object.values(m.parts).reduce((n,a)=>n+a.length,0);$('pageWarning').classList.toggle('show',count>10||m.notes.length>300||m.goal.length>200);return;}const paper=$('notebook');const contents=$('paperContent');if(!paper||!contents)return;const last=contents.lastElementChild;const bottom=last?last.getBoundingClientRect().bottom-paper.getBoundingClientRect().top:0;const allowed=paper.clientHeight-18;$('pageWarning').classList.toggle('show',bottom>allowed);}
     function renderHeaderEditor(){const m=model();for(const key of ['title','goal','date','footerDate','notes']){const el=document.querySelector('[data-prop="'+key+'"]');if(el)el.value=m[key]||'';}}
-    function renderHabitEditor(){const m=model();$('habitsEditor').innerHTML=Object.keys(sectionNames).map(key=>`<div class="segment-label"><h4>${sectionNames[key].charAt(0)+sectionNames[key].slice(1).toLowerCase()}</h4><span>${m.parts[key].length} hábito(s)</span></div><div class="habit-list">${m.parts[key].map((h,index)=>`<div class="habit-item" data-habit-id="${esc(h.id)}" data-period="${key}"><div class="habit-meta"><span class="habit-id">CUIDADO ${String(index+1).padStart(2,'0')}</span><div class="habit-controls"><button class="icon-button" type="button" data-habit-act="up" title="Subir" aria-label="Mover hábito para cima" ${index===0?'disabled':''}>↑</button><button class="icon-button" type="button" data-habit-act="down" title="Descer" aria-label="Mover hábito para baixo" ${index===m.parts[key].length-1?'disabled':''}>↓</button><button class="icon-button danger" type="button" data-habit-act="delete" title="Excluir hábito" aria-label="Excluir hábito">×</button></div></div><div class="habit-input"><input type="time" data-habit-field="time" value="${esc(h.time)}" aria-label="Horário do hábito"><input type="text" data-habit-field="text" maxlength="150" value="${esc(h.text)}" placeholder="O que quero fazer" aria-label="Descrição do hábito"></div></div>`).join('')}</div><button class="add-habit" type="button" data-add="${key}">+ Adicionar hábito</button>`).join('');}
+    function renderHabitEditor(){const m=model();$('habitsEditor').innerHTML=(m.settings.mode==='weekly'?['morning']:Object.keys(sectionNames)).map(key=>`<div class="segment-label"><h4>${m.settings.mode==='weekly'?'Cuidados da semana':sectionNames[key].charAt(0)+sectionNames[key].slice(1).toLowerCase()}</h4><span>${m.parts[key].length} hábito(s)</span></div><div class="habit-list">${m.parts[key].map((h,index)=>`<div class="habit-item" data-habit-id="${esc(h.id)}" data-period="${key}"><div class="habit-meta"><span class="habit-id">CUIDADO ${String(index+1).padStart(2,'0')}</span><div class="habit-controls"><button class="icon-button" type="button" data-habit-act="up" title="Subir" aria-label="Mover hábito para cima" ${index===0?'disabled':''}>↑</button><button class="icon-button" type="button" data-habit-act="down" title="Descer" aria-label="Mover hábito para baixo" ${index===m.parts[key].length-1?'disabled':''}>↓</button><button class="icon-button danger" type="button" data-habit-act="delete" title="Excluir hábito" aria-label="Excluir hábito">×</button></div></div><div class="habit-input"><input type="time" data-habit-field="time" value="${esc(h.time)}" aria-label="Horário do hábito"><input type="text" data-habit-field="text" maxlength="150" value="${esc(h.text)}" placeholder="O que quero fazer" aria-label="Descrição do hábito"></div></div>`).join('')}</div><button class="add-habit" type="button" data-add="${key}">+ Adicionar hábito</button>`).join('');}
     function renderDoodlePalette(){
       const entries=Object.entries(artwork).filter(([key])=>key!=='custom' && (artFilter==='all'||(artFilter==='ink'?key.startsWith('ink_'):artFilter==='urban'?key.startsWith('urb_'):!key.startsWith('ink_')&&!key.startsWith('urb_'))));
       $('doodlePalette').innerHTML=entries.map(([key,item])=>`<button type="button" class="doodle-button ${key.startsWith('ink_')||key.startsWith('urb_')?'doodle-ink':''}" data-add-doodle="${key}" aria-label="Adicionar desenho de ${item.label}">${drawingSVG(key)}<small>${item.label}</small></button>`).join('');
@@ -817,10 +983,10 @@ body[data-mode="mindmap"] .mind-stage{flex:1;min-height:0;height:100%;margin-bot
     const swatches=['#6c5748','#67735d','#8c6f73','#556674','#9a765c'];
     function renderSelectedTools(){const d=model().doodles.find(x=>x.id===selectedDoodle),el=$('selectedDoodleTools');el.hidden=!d;if(!d)return;el.innerHTML=`<h4>${artwork[d.type].label} selecionado</h4><div class="field"><label for="doodleSize">Tamanho</label><div class="range-wrap"><input id="doodleSize" type="range" min="20" max="110" step="1" data-doodle-prop="size" value="${d.size}"><output>${d.size}px</output></div></div><div class="field"><label for="doodleAngle">Rotação</label><div class="range-wrap"><input id="doodleAngle" type="range" min="-180" max="180" step="5" data-doodle-prop="angle" value="${d.angle}"><output>${d.angle}°</output></div></div><div class="field"><label>Cor da caneta</label><div class="color-row">${swatches.map(c=>`<button type="button" class="swatch" style="background:${c}" data-doodle-color="${c}" aria-label="Usar cor ${c}" aria-pressed="${d.color===c}"></button>`).join('')}</div></div><button type="button" class="btn danger small" id="removeDoodle">Remover desenho</button>`;}
     function renderModels(){const m=model();$('modelList').innerHTML=state.models.slice().sort((a,b)=>b.updated-a.updated).map(it=>`<div class="model-item ${it.id===state.activeId?'active':''}"><button class="model-main" type="button" data-model="${esc(it.id)}"><strong>${esc(it.title)||'Folha sem título'}</strong><small>${it.id===state.activeId?'Editando agora':'Abrir modelo'}</small></button><div class="model-actions"><button class="icon-button" type="button" data-model-action="duplicate" data-id="${esc(it.id)}" aria-label="Duplicar ${esc(it.title)}" title="Duplicar">⧉</button><button class="icon-button danger" type="button" data-model-action="delete" data-id="${esc(it.id)}" aria-label="Excluir ${esc(it.title)}" title="Excluir">×</button></div></div>`).join('');
-      $('templateChoices').innerHTML=[['care','Ritual de cuidados','Cinco hábitos para manhã e noite, com atmosfera mais íntima.'],['simple','Ritual essencial','Começar com apenas três hábitos e muito espaço para respirar.'],['blank','Folha em branco','Montar seu próprio ritmo do zero.'],['map','Mapa mental','Organize conexões e ideias em ramos livres.']].map(([id,title,desc])=>`<button class="model-choice" data-template="${id}" type="button"><strong>+ ${title}</strong><span>${desc}</span></button>`).join('');
+      $('templateChoices').innerHTML=[['personal-daily','♡ Meu ritmo diário','Pronta para a parede: manhã, tarde e noite.'],['personal-weekly','✿ Cuidados semanais','Cuidados pessoais, quarto e escola.'],['care','Ritual de cuidados','Cinco hábitos para manhã e noite, com atmosfera mais íntima.'],['simple','Ritual essencial','Começar com apenas três hábitos e muito espaço para respirar.'],['blank','Folha em branco','Montar seu próprio ritmo do zero.'],['map','Mapa mental','Organize conexões e ideias em ramos livres.']].map(([id,title,desc])=>`<button class="model-choice" data-template="${id}" type="button"><strong>+ ${title}</strong><span>${desc}</span></button>`).join('');
     }
     function renderSettings(){const m=model();$('sheetType').value=m.settings.mode||'routine';$('paperDirection').value=m.settings.orientation||'portrait';$('showTimes').checked=m.settings.showTimes;$('showSignature').checked=m.settings.showSignature;$('showEmptyAfternoon').checked=m.settings.showEmptyAfternoon;$('paperShade').value=m.settings.shade;}
-    function fullRender(){renderHeaderEditor();renderHabitEditor();renderModels();renderSettings();renderSelectedTools();renderMindEditor();renderPaper();}
+    function fullRender(){renderHeaderEditor();renderSettings();renderHabitEditor();renderModels();renderSelectedTools();renderMindEditor();renderPaper();}
     function switchTab(name){tab=name;document.querySelectorAll('[data-tab]').forEach(btn=>btn.setAttribute('aria-selected',String(btn.dataset.tab===name)));document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active',p.id==='panel-'+name));if(name==='draw')renderSelectedTools();if(name==='models')renderModels();if(name==='sheet')renderMindEditor();}
     function addHabit(key){model().parts[key].push(habit(''));renderHabitEditor();renderPaper();save();const inputs=document.querySelectorAll(`[data-period="${key}"] [data-habit-field="text"]`);inputs[inputs.length-1]?.focus();}
     function addDoodle(type){const m=model();const index=m.doodles.length,spots=[[87,12],[14,86],[88,86],[16,15],[76,54],[21,60]];const p=spots[index%spots.length];const d={id:uid(),type,x:p[0],y:p[1],size:(type.startsWith('ink_')||type.startsWith('urb_'))?92:52,angle:0,color:'#6c5748'};m.doodles.push(d);selectedDoodle=d.id;renderSelectedTools();renderPaper();save();toast('Desenho adicionado. Arraste para posicionar.');}
@@ -841,7 +1007,7 @@ body[data-mode="mindmap"] .mind-stage{flex:1;min-height:0;height:100%;margin-bot
         renderSelectedTools();renderPaper();save();toast('Seu desenho entrou na folha. Arraste para posicionar.');
       }catch(e){toast('Não foi possível abrir a imagem.');}finally{$('drawingInput').value='';}
     }
-    function duplicateModel(id){const other=state.models.find(x=>x.id===id);if(!other)return;const copy=cleanModel(JSON.parse(JSON.stringify(other)));copy.id=uid();copy.title=(copy.title+' (cópia)').slice(0,84);copy.created=Date.now();copy.updated=Date.now();copy.doodles.forEach(d=>d.id=uid());Object.values(copy.parts).forEach(arr=>arr.forEach(h=>h.id=uid()));state.models.push(copy);state.activeId=copy.id;selectedDoodle=null;fullRender();switchTab('sheet');save();toast('Modelo duplicado.');}
+    function duplicateModel(id){const other=state.models.find(x=>x.id===id);if(!other)return;const copy=cleanModel(JSON.parse(JSON.stringify(other)));copy.id=uid();copy.presetType='';copy.title=(copy.title+' (cópia)').slice(0,84);copy.created=Date.now();copy.updated=Date.now();copy.doodles.forEach(d=>d.id=uid());Object.values(copy.parts).forEach(arr=>arr.forEach(h=>h.id=uid()));state.models.push(copy);state.activeId=copy.id;selectedDoodle=null;fullRender();switchTab('sheet');save();toast('Modelo duplicado.');}
     function deleteModel(id){const item=state.models.find(x=>x.id===id);if(!item)return;if(state.models.length===1){toast('Mantenha pelo menos uma folha.');return;}if(!confirm(`Excluir a folha "${item.title}"? Esta ação não pode ser desfeita.`))return;state.models=state.models.filter(x=>x.id!==id);if(state.activeId===id){state.activeId=state.models[0].id;selectedDoodle=null;}fullRender();save();toast('Folha excluída.');}
     function createTemplate(kind){const fresh=makeModel(kind);state.models.push(fresh);state.activeId=fresh.id;selectedDoodle=null;fullRender();switchTab('sheet');save();toast('Sua nova folha está pronta.');}
     function fileDownload(name,blob){const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),900);}
@@ -851,7 +1017,7 @@ body[data-mode="mindmap"] .mind-stage{flex:1;min-height:0;height:100%;margin-bot
     async function copyText(){try{await navigator.clipboard.writeText(plainText());toast('Texto copiado.');}catch(e){const a=document.createElement('textarea');a.value=plainText();document.body.appendChild(a);a.select();try{document.execCommand('copy');toast('Texto copiado.');}catch(err){toast('Não foi possível copiar.');}a.remove();}}
     function exportPdf(){selectedDoodle=null;renderPaper();persist();window.print();}
     document.querySelector('.tabbar').addEventListener('click',e=>{const b=e.target.closest('[data-tab]');if(b)switchTab(b.dataset.tab);});
-    $('sheetType').addEventListener('change',e=>{model().settings.mode=e.target.value;renderMindEditor();renderPaper();save();});
+    $('sheetType').addEventListener('change',e=>{model().settings.mode=e.target.value;renderHabitEditor();renderMindEditor();renderPaper();save();});
     $('paperDirection').addEventListener('change',e=>{model().settings.orientation=e.target.value;renderPaper();save();});
     $('addMindNode').addEventListener('click',()=>{
       const m=model(),items=m.mapNodes;
@@ -929,6 +1095,13 @@ body[data-mode="mindmap"] .mind-stage{flex:1;min-height:0;height:100%;margin-bot
       if(updateHash){const hash=isHome?'inicio':tabName;if(location.hash!=='#'+hash)history.replaceState(null,'','#'+hash);}
       window.scrollTo({top:0,behavior:'instant'});
     }
+    function openPersonal(kind){
+      const expected=kind==='weekly'?'Meus cuidados da semana':'Meu ritmo diário';
+      let target=state.models.find(m=>m.presetType===(kind==='weekly'?'personal-weekly':'personal-daily')) || state.models.find(m=>m.title===expected&&m.settings.mode===(kind==='weekly'?'weekly':'wall'));
+      if(!target){target=makeModel(kind==='weekly'?'personal-weekly':'personal-daily');state.models.push(target);}
+      state.activeId=target.id;selectedDoodle=null;fullRender();persist();showScreen('sheet');
+    }
+    document.querySelectorAll('[data-open-routine]').forEach(btn=>btn.addEventListener('click',()=>openPersonal(btn.dataset.openRoutine)));
     document.querySelectorAll('[data-route]').forEach(btn=>btn.addEventListener('click',()=>showScreen(btn.dataset.route)));
     $('backHome').addEventListener('click',()=>showScreen('home'));
     document.querySelectorAll('[data-home-art]').forEach(el=>{const type=el.dataset.homeArt;el.innerHTML=drawingSVG(type);});
