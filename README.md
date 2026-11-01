@@ -1,35 +1,39 @@
-# MARGEM 4.0 — Caderno, desenhos e mapa mental
+# MARGEM 5.0 — Meu caderno, minha rotina
 
-**Um caderno digital feito para transformar planos, ideias e cuidados em folhas que podem ser copiadas à mão.**
+Um caderno digital para transformar planos, ideias e cuidados em folhas bonitas que podem ser copiadas manualmente no papel.
 
-## Novidades desta versão
+## Novidade: Minha rotina pessoal
 
-- **Cotidiano noturno:** nova coleção de 28 desenhos individuais, extraídos e preparados a partir de composições artísticas originais aprovadas na conversa: fones de ouvido, café, livros, meias, cama, janela à noite, skyline, gato, fotografias, estrelas, e outros objetos e cenas. Ficam disponíveis em **Desenhos → Cotidiano noturno** para inserir, arrastar, girar e redimensionar.
-- **Orientação da folha:** escolha vertical/retrato ou horizontal/paisagem, tanto para rotina quanto para mapa mental; a exportação usa o formato A4 adequado.
-- **Mapa mental:** em **Folha → Modelo de organização → Mapa mental**, escreva o tema, edite ramos e sub-ramos, arraste os nós diretamente na folha e exporte o desenho completo em PDF. Crie um mapa novo a partir de **Modelos → Mapa mental**.
-- **Preserva seus modelos:** a chave de armazenamento segue como `margem.caderno.v1`, mantendo os documentos salvos neste mesmo dispositivo/navegador. Novos campos são opcionais e recebem valores padrão quando modelos antigos são carregados.
+A tela inicial ganhou uma área **Minha rotina, do meu jeito**, com duas folhas editáveis e prontas para exportação:
 
-## Arquivos do site
+- **Meu ritmo diário** — A4 horizontal, três colunas (manhã, tarde e noite), caixas para os dias da semana, escola, curso, cuidados, alimentação, água, leitura, estudo, descanso, horários e observações.
+- **Meus cuidados da semana** — A4 vertical, tabela semanal para quarto, roupas de cama, cuidados pessoais, mochila, notas, faltas, prazos e tempo para si.
 
-- `index.html`: aplicativo e biblioteca artística anterior incorporada.
-- `urban-art.js`: nova coleção de 28 ilustrações processadas, pronta para funcionar offline, sem depender de imagens externas.
+As duas folhas também podem ser abertas pelo menu do Editor ou criadas em **Modelos**. O editor permite adicionar, excluir, reorganizar ou reescrever hábitos, escolher desenhos e exportar a folha como PDF pela impressão do navegador.
 
-**Os dois arquivos precisam ficar lado a lado na raiz do repositório.** O MARGEM é hospedável diretamente no GitHub Pages e não exige build, banco de dados, conta ou biblioteca externa.
+Os modelos são adicionados **uma única vez** ao navegador na primeira abertura da atualização, sem apagar os documentos existentes. Continuamos utilizando a chave `margem.caderno.v1`; a configuração de instalação é `margem.personal-sheets.v1`. Se o usuário apagar as folhas, elas não serão recriadas automaticamente; ele pode criar outra em Modelos. Faça backups em JSON.
 
-## Publicação no GitHub Pages
+## Recursos existentes
 
-Em **Settings → Pages**, selecione **Deploy from a branch**, `main`, `/ (root)`.
+- Editor de rotinas tradicionais em orientação vertical ou horizontal.
+- Mapas mentais com tema central e ramos editáveis.
+- Biblioteca de desenhos artísticos, simples e de cotidiano noturno, com importação de imagens autorizadas.
+- Salvamento local sem contas, com exportação/importação de backup.
+- PDF de uma página A4 pela opção **Gerar PDF → Salvar como PDF** (habilite gráficos de fundo para preservar o papel creme).
 
-URL do projeto: https://meurepertorio.github.io/margem-caderno/
+## Arquivos
 
-## Como criar o PDF
+- `index.html` — Aplicativo e biblioteca de ilustrações originais à tinta integradas.
+- `urban-art.js` — 28 desenhos de cotidiano noturno, usados no editor e nos novos modelos.
 
-Em **Gerar PDF**, escolha **Salvar como PDF** na janela de impressão. A orientação acompanha a escolha na folha e o tamanho é A4. Habilite **Gráficos de fundo** para preservar a cor do papel e os desenhos.
+Mantenha os arquivos lado a lado na raiz do repositório; o projeto é estático e funciona no GitHub Pages.
 
-## Privacidade e backups
+## Saúde e planejamento
 
-Os dados continuam armazenados no próprio navegador com `localStorage`; não há sincronização automática. Faça backup JSON regularmente, especialmente antes de limpar o navegador.
+A rotina é uma proposta **editável**, não uma prescrição médica. O fio dental foi colocado à noite. Enxágue bucal, se usado, aparece como opcional, em horário separado da escovação. Não foi incluído limão. As quantidades de água são lembretes ajustáveis e não uma meta universal de saúde. Horários de escola e curso são referências para dias letivos; não há obrigação de marcar tarefas escolares aos fins de semana.
 
-## Direitos e referências
+## Publicação
 
-As novas imagens são recortes processados de ilustrações originais geradas para esta coleção, não cópias de obras obtidas do Pinterest. É possível importar desenhos próprios ou que você tenha permissão de usar.
+Ative em **Settings → Pages → Deploy from a branch → main → /(root)**.
+
+https://meurepertorio.github.io/margem-caderno/
